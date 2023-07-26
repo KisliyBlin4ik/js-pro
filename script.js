@@ -24,12 +24,12 @@ const subjects = {
 }
 
 const getLessonNames = (subjects) => {
-    let NamesArr = [];
+    let namesArr = [];
     let lessonNames = '';
 
     for (let subject in subjects) {
-        NamesArr.push(subject);
-        lessonNames = NamesArr.join(', ');
+        namesArr.push(subject);
+        lessonNames = namesArr.join(', ');
     }
 
     return lessonNames;
@@ -54,7 +54,6 @@ console.log(sumOfPeople(subjects));
 
 const studentsAverage = (subjects) => {
     let sum = 0;
-    let studentsAverage;
     let allLessons = Object.keys(subjects).length
 
     for (let subject of Object.values(subjects)) {
@@ -62,7 +61,7 @@ const studentsAverage = (subjects) => {
         sum += students;
     }
 
-    return studentsAverage = sum / allLessons;
+    return sum / allLessons;
 }
 
 console.log(studentsAverage(subjects));
@@ -91,7 +90,7 @@ const subjectsArr = (subject) => {
 
       subjectsArr.sort((left, right) => right.teachers - left.teachers);
 
-      const sortedSubjectNames = subjectsArr.map((subject) => subject.subjectName);
+      const sortedSubjectNames = subjectsArr.map(({subjectName}) => subjectName);
 
       return sortedSubjectNames;
 }
