@@ -48,11 +48,7 @@ console.log(getUsersName(users));
 // 2. Посчитать общее количество машин у пользователей
 function getUsersCars(users: Array<IUser>):number {
     let i = 0;
-    users.map(({cars}) => {
-        if (cars) {
-            cars.map(() => i++);
-        }
-    })
+    users.map(({cars}) => cars ? cars.map(() => i++) : [])
     return i
 }
 console.log(getUsersCars(users));
@@ -61,11 +57,7 @@ console.log(getUsersCars(users));
 // 3. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие образования
 function getEducatedUsers(users: Array<IUser>):string {
     let arrUsers: string[] = [];
-    users.map(({name, hasEducation}) => {
-        if (hasEducation) {
-            arrUsers.push(name);
-        }
-    })
+    users.map(({name, hasEducation}) => hasEducation ? arrUsers.push(name) : [])
     let educatedUsers: string = arrUsers.join(', ');
     return educatedUsers
 }
@@ -75,11 +67,7 @@ console.log(getEducatedUsers(users));
 //4. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие животных
 function getUsersWithAnimals(users: Array<IUser>): string {
     let arrUsers: string[] = [];
-    users.map(({name, animals}) => {
-        if(animals) {
-            arrUsers.push(name);
-        }
-    })
+    users.map(({name, animals}) => animals ? arrUsers.push(name) : [])
     let usersWithAnimals: string = arrUsers.join(', ');
     return usersWithAnimals
 }
