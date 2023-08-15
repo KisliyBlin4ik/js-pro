@@ -3,6 +3,7 @@ import Title from './components/Title';
 import './App.css';
 import BurgerMenu from './components/BurgerMenu';
 import TabMenu from './components/TabMenu';
+import PostList from './components/PostList';
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
         <BurgerMenu />
       </header>
       <main>
-        <Title />
-        <TabMenu />
+        {/* <Title /> */}
+        {/* <TabMenu /> */}
+        <PostList />
       </main>
     </div>
   )
