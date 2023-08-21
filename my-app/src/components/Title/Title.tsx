@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-const Title = () => {
+interface ITitle {
+  text: string;
+}
+
+const Title: FC<ITitle> = ({text}) => {
   return (
-    <h1>Sign in</h1>
+    <h1>{text}</h1>
   )
 }
 
