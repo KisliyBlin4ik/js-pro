@@ -65,8 +65,9 @@ const PostMid:FC<IPost> = ({title, date}) => {
         <div className='post'>
             <div className='post__content'>
                 <img src={image} alt="image" />
-                <p className='post__date'>{date}</p>
-                <p className='post__title'>{title}</p>
+            <p className='post__date'>{date}</p>
+            <p className='post__title'>{title}</p>
+
             </div>
         </div> 
     )
