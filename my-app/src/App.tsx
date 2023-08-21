@@ -4,6 +4,10 @@ import './App.css';
 import BurgerMenu from './components/BurgerMenu';
 import TabMenu from './components/TabMenu';
 import PostList from './components/PostList';
+import PageTemplate from './components/PageTemlate/PageTemplate';
+import Success from './components/Success';
+import SignIn from './components/SignIn/SignIn';
+import PostItem from './components/PostList/PostItem';
 
 function App() {
   return (
@@ -11,11 +15,11 @@ function App() {
       <header>
         <BurgerMenu />
       </header>
-      <main>
-        {/* <Title /> */}
-        {/* <TabMenu /> */}
-        <PostList />
-      </main>
+        <Success />
+        {/* <SignIn /> */}
+        {/* <PostList /> */}
+        {/* <PostItem /> */}
+
     </div>
   )
 }

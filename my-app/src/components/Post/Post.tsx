@@ -2,10 +2,11 @@ import React, { useState, FC } from 'react'
 import image from '../../assets/image.jpg'
 import './style.css'
 
-interface IPost {
+
+export interface IPost {
     id: number;
     text?: string;
-    date: string;
+    date?: string;
     title: string;
     img?: string;
 }
@@ -27,7 +28,7 @@ const MyComponent = () => {
             <div className='post__item__left'>
                 <div className='post__big'>
                     {posts.map(({title, text, date, img, id}) => (
-                        id < 2 ? <PostBig key={id} title={title} text={text} date={date} img={img} id={id}/> : ''
+                        id < 2 ? <PostBig key={id} title={title} text='' date={date} img={img} id={id}/> : ''
                     ))}
                 </div>
                 <div className='post__mid'>
@@ -46,7 +47,7 @@ const MyComponent = () => {
     )
 }
 
-const PostBig:FC<IPost> = ({title, text, date}) => {
+export const PostBig:FC<IPost> = ({title, text, date}) => {
     return (
         <div className='post'>
             <div className='post__content'>
@@ -60,18 +61,19 @@ const PostBig:FC<IPost> = ({title, text, date}) => {
         </div> 
     )
 }
-const PostMid:FC<IPost> = ({title, date}) => {
+export const PostMid:FC<IPost> = ({title, date}) => {
     return (
         <div className='post'>
             <div className='post__content'>
                 <img src={image} alt="image" />
-                <p className='post__date'>{date}</p>
-                <p className='post__title'>{title}</p>
+            <p className='post__date'>{date}</p>
+            <p className='post__title'>{title}</p>
+
             </div>
         </div> 
     )
 }
-const PostSmall:FC<IPost> = ({title, date}) => {
+export const PostSmall:FC<IPost> = ({title, date}) => {
     return (
         <div className='post'>
             <div className='post__content'>

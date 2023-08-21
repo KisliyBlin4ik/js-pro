@@ -1,11 +1,18 @@
 import React from 'react'
-import MyComponent from '../Post/Post'
+import AllPost from '../Post/AllPost/AllPost'
+import TabMenu from '../TabMenu/TabMenu'
+import PageTemplate from '../PageTemlate'
+// import MyComponent from '../Post/Post'
     
 const PostList = () => {
     return (
-        <div className='post__container'>
-            <MyComponent/>
-        </div>
+        <PageTemplate title='Blog'>
+            <div className='post__container'>
+                <TabMenu />
+                <AllPost />
+            </div>
+        </PageTemplate>
+
     )
 }
 
