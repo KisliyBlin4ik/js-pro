@@ -9,11 +9,12 @@ import Success from './components/Success';
 import SignIn from './components/SignIn/SignIn';
 import PostItem from './components/PostList/PostItem';
 import SearchPost from './components/Post/SearchPost';
-import { StyledWrapper } from './styled';
-import './App.css';
 import BigPost from './components/Post/BigPost';
 import MyComponent from './components/Post/Post';
 import AllPost from './components/Post/AllPost/AllPost';
+import { StyledWrapper } from './styled';
+import Counter from './components/Counter';
+import './App.css';
 
 interface IThemeContext {
   icon: 'light_mode' | 'dark_mode';
@@ -25,40 +26,50 @@ export const ThemeContext = createContext<IThemeContext>({icon: 'light_mode', th
 
 function App() {
   const [inputData, setInputData] = useState('');
-  const [icon, setIcon] = useState<'light_mode' | 'dark_mode'>("dark_mode");
-  const [theme, setTheme] = useState<'light' | 'dark'>("light");
+  // const [icon, setIcon] = useState<'light_mode' | 'dark_mode'>("dark_mode");
+  // const [theme, setTheme] = useState<'light' | 'dark'>("light");
 
-  const toggleTheme = () => {
-    setIcon(icon === 'dark_mode' ? 'light_mode' : 'dark_mode');
-    setTheme(theme === 'dark' ? 'light' : 'dark'); 
-  }
+  // const toggleTheme = () => {
+  //   setIcon(icon === 'dark_mode' ? 'light_mode' : 'dark_mode');
+  //   setTheme(theme === 'dark' ? 'light' : 'dark'); 
+  // }
 
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // console.log(location);
   
 
+  // return (
+  //   <ThemeContext.Provider value={{icon, theme, toggleTheme}}>
+  //   <StyledWrapper className='wrapper' theme={theme}>
+      // <header>
+      //   <BurgerMenu onSubmit={handleInputSubmit}/>
+      //   {/* <Link to="/blog">blog</Link> */}
+      // </header>
+      // <Routes>
+      //   <Route path='/blog' element={<PostList />}></Route>
+      //   <Route path='/blog/:id' element={<PostItem />}></Route>
+      //   <Route path='/signIn' element={<SignIn />}></Route>
+      //   <Route path='/success' element={<Success />}></Route>
+      //   <Route path='/search' element={<SearchPost inputData={inputData}/>}></Route>
+      // </Routes>
+  //     {location.pathname === '/' && <Navigate to='blog'/>}
+  //   </StyledWrapper>
+  // </ThemeContext.Provider>
+  // )
   return (
-    <ThemeContext.Provider value={{icon, theme, toggleTheme}}>
-    <StyledWrapper className='wrapper' theme={theme}>
+    <StyledWrapper className='wrapper' >
       <header>
         <BurgerMenu onSubmit={handleInputSubmit}/>
         {/* <Link to="/blog">blog</Link> */}
       </header>
-      <Routes>
-        <Route path='/blog' element={<PostList />}></Route>
-        <Route path='/blog/:id' element={<PostItem />}></Route>
-        <Route path='/signIn' element={<SignIn />}></Route>
-        <Route path='/success' element={<Success />}></Route>
-        <Route path='/search' element={<SearchPost inputData={inputData}/>}></Route>
-      </Routes>
-      {location.pathname === '/' && <Navigate to='blog'/>}
+      <SignIn />
+      {/* <Counter /> */}
     </StyledWrapper>
-  </ThemeContext.Provider>
   )
 }
 

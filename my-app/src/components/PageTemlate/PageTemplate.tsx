@@ -3,6 +3,8 @@ import { ThemeContext } from 'src/App'
 import { StyledPageTemplate } from 'src/styled';
 import ToggleThemeBtn from './ToggleThemeBtn';
 import './style.css'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 interface IPageTemplate {
     title?: string;
