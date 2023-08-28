@@ -20,9 +20,9 @@ const BurgerMenu = ({ onSubmit }: any) => {
         </div>
         <div className='search'>
           <input type="text" className='search' size={100} value={inputValue} onChange={handleChange}/>
-          <span className="material-symbols-outlined">
-            search
-          </span>
+          <a href='/search'>
+            <div className="material-symbols-outlined">search</div>
+          </a>
         </div>
         <div className='userName'>
             <span>artem malkin</span>

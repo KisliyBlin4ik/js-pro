@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from 'react'
-import { IPost, PostBig, PostMid, PostSmall } from '../Post';
+import { IPost,  PostMid, PostSmall } from '../Post';
 import PageTemplate from 'src/components/PageTemlate/PageTemplate'
 
 const SearchPost = ({ inputData }: any) => {

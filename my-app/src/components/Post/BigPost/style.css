@@ -1,4 +1,4 @@
-.post {
+.postB {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -12,11 +12,11 @@
     align-items: center;
 }
 
-.post .post__image {
+.post .post__imageB {
     width: 100vh;
     height: 100%;
 }
 
-.post .post__text {
+.post .post__textB {
     padding: 0 30px;
 }

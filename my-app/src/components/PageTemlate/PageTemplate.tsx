@@ -15,7 +15,7 @@ const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
   return (
     <StyledPageTemplate className='PageTemplate' theme={theme}>
       <main>
-        <a className='BackToHome' href="#">Back to home</a>
+        <a className='BackToHome' href="./">Back to home</a>
         <ToggleThemeBtn></ToggleThemeBtn>
         <div className='titleWrapper'>
             <h1>{title}</h1>

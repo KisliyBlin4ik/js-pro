@@ -1,8 +1,7 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useEffect ,FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import image from '../../assets/catImage.jpg'
 import './style.css'
-
-
 export interface IPost {
     id: number;
     text?: string;
@@ -20,10 +19,12 @@ const MyComponent = () => {
         const results = data.results;
         setArrPost(results);
     };
+    useEffect(() => {
+        fetchPost()
+    }, [])
 
     return (
         <>
-        <button onClick={fetchPost} className='post__btn'>Load Posts</button>
         <div className='post__items'>
             <div className='post__item__left'>
                 <div className='post__big'>
@@ -47,9 +48,11 @@ const MyComponent = () => {
     )
 }
 
-export const PostBig:FC<IPost> = ({title, text, date}) => {
+export const PostBig:FC<IPost> = ({title, text, date, id}) => {
+    const navigate = useNavigate();
+
     return (
-        <div className='post'>
+        <div className='post' onClick={() => navigate(`/blog/${id}`)}>
             <div className='post__content'>
                 <p className='post__date'>{date}</p>
                 <p className='post__title'>{title}</p>
@@ -61,9 +64,11 @@ export const PostBig:FC<IPost> = ({title, text, date}) => {
         </div> 
     )
 }
-export const PostMid:FC<IPost> = ({title, date}) => {
+export const PostMid:FC<IPost> = ({title, date, id}) => {
+    const navigate = useNavigate();
+
     return (
-        <div className='post'>
+        <div className='post' onClick={() => navigate(`/blog/${id}`)}>
             <div className='post__content'>
                 <img src={image} alt="image" />
             <p className='post__date'>{date}</p>
@@ -73,9 +78,11 @@ export const PostMid:FC<IPost> = ({title, date}) => {
         </div> 
     )
 }
-export const PostSmall:FC<IPost> = ({title, date}) => {
+export const PostSmall:FC<IPost> = ({title, date, id}) => {
+    const navigate = useNavigate();
+
     return (
-        <div className='post'>
+        <div className='post' onClick={() => navigate(`/blog/${id}`)}>
             <div className='post__content'>
                 <p className='post__date'>{date}</p>
                 <p className='post__title'>{title}</p>
