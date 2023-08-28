@@ -8,8 +8,9 @@ const BurgerMenu = ({ onSubmit }: any) => {
   const handleChange = (event: any) => {
     setInputValue(event.target.value)
   } 
-
-  onSubmit(inputValue)
+  useEffect(() => {
+    onSubmit(inputValue)
+  }, [])
 
   return (
     <div className='header__container'>
