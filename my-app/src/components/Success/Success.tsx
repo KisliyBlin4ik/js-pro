@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import PageTemplate from 'src/components/PageTemlate'
 import './style.css'
 import { ThemeContext } from 'src/App'
-import { StyledContainer } from './styled'
+import { StyledContainer } from 'src/styled'
 
 const Success = () => {
   const {theme, toggleTheme} = useContext(ThemeContext);
-  
 
   return (
     <PageTemplate title='Success'>

@@ -52,6 +52,25 @@
     border-radius: 10px;
 }
 
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+}
+
+.search input {
+    box-sizing: border-box;
+    height: 50%;
+    border: none;
+}
+
+.search span {
+    color: white;
+    font-size: 35px;
+}
+
 .userName {
     padding: 26px 15px;
     border-left: 1px solid white;

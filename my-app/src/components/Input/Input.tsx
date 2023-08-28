@@ -10,8 +10,6 @@ interface IInput {
 }
 
 const Input: FC<IInput> = ({type, placeholder, value, label, onChange}) => {
-    
-
   return (
     <div className='formInput'>
         <label>{label}</label>

@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react'
-import image from 'src/assets/image.jpg'
+import image from 'src/assets/catImage.jpg'
 import { IPost, PostMid, PostSmall } from '../Post'
 import 'src/components/Post/style.css'
 
