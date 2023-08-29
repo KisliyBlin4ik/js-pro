@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react'
-import image from 'src/assets/image.jpg'
+import image from 'src/assets/catImage.jpg'
 import { IPost } from '../Post'
 import './style.css'
 
@@ -25,7 +25,7 @@ const BigPost = () => {
     )
 }
 
-const PostBig:FC<IPost> = ({title, text, date}) => {
+export const PostBig:FC<IPost> = ({title, text, date}) => {
     return (
         <div className='post'>
                 <h1 className='post__title'>{title}</h1>

@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react'
-import image from '../../assets/image.jpg'
+import image from '../../assets/catImage.jpg'
 import './style.css'
 
 

@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { IPost } from '../Post/Post';
 import "./style.css"
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ onSubmit }: any) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event: any) => {
+    setInputValue(event.target.value)
+  } 
+  useEffect(() => {
+    onSubmit(inputValue)
+  }, [])
+
   return (
     <div className='header__container'>
         <div className="burgerMenu">
@@ -9,7 +19,12 @@ const BurgerMenu = () => {
                 <span className='burgerLine'></span>
             </div>
         </div>
-        <div className='search'></div>
+        <div className='search'>
+          <input type="text" className='search' size={100} value={inputValue} onChange={handleChange}/>
+          <span className="material-symbols-outlined">
+            search
+          </span>
+        </div>
         <div className='userName'>
             <span>artem malkin</span>
         </div>

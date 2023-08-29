@@ -20,6 +20,11 @@ main {
     width: 100%;
 }
 
+main .BackToHome {
+    color: rgb(170, 93, 192);
+    font-size: 20px;
+}
+
 footer {
     display: flex;
     align-items: center;
@@ -32,8 +37,9 @@ footer {
 
 .content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .titleWrapper {
