@@ -1,5 +1,5 @@
 import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import Title from './components/Title';
 import BurgerMenu from './components/BurgerMenu';
 import TabMenu from './components/TabMenu';
@@ -11,6 +11,9 @@ import PostItem from './components/PostList/PostItem';
 import SearchPost from './components/Post/SearchPost';
 import { StyledWrapper } from './styled';
 import './App.css';
+import BigPost from './components/Post/BigPost';
+import MyComponent from './components/Post/Post';
+import AllPost from './components/Post/AllPost/AllPost';
 
 interface IThemeContext {
   icon: 'light_mode' | 'dark_mode';
@@ -34,20 +37,28 @@ function App() {
     setInputData(inputValue);
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  
+
   return (
     <ThemeContext.Provider value={{icon, theme, toggleTheme}}>
-      <StyledWrapper className='wrapper' theme={theme}>
-        <header>
-          <BurgerMenu onSubmit={handleInputSubmit}/>
-        </header>
-        {/* <Success /> */}
-        {/* <SignIn /> */}
-        {/* <PostList /> */}
-        {/* <PostItem /> */}
-        <SearchPost inputData={inputData}/>
-      </StyledWrapper>
-    </ThemeContext.Provider>
-
+    <StyledWrapper className='wrapper' theme={theme}>
+      <header>
+        <BurgerMenu onSubmit={handleInputSubmit}/>
+        {/* <Link to="/blog">blog</Link> */}
+      </header>
+      <Routes>
+        <Route path='/blog' element={<PostList />}></Route>
+        <Route path='/blog/:id' element={<PostItem />}></Route>
+        <Route path='/signIn' element={<SignIn />}></Route>
+        <Route path='/success' element={<Success />}></Route>
+        <Route path='/search' element={<SearchPost inputData={inputData}/>}></Route>
+      </Routes>
+      {location.pathname === '/' && <Navigate to='blog'/>}
+    </StyledWrapper>
+  </ThemeContext.Provider>
   )
 }
 
