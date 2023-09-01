@@ -1,25 +1,12 @@
 import { legacy_createStore as createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-const initialState = {
-    count: 0,
-    theme: 'light',
+export const initialState = {
+    theme: 'light_mode',
 };
 
 const rootReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        // case 'INCREMENT': {
-        //     return {
-        //         ...state,
-        //         count: state.count + action.payload,
-        //     }
-        // }
-        // case 'DECREMENT': {
-        //     return {
-        //         ...state,
-        //         count: state.count - 1,
-        //     }
-        // }
         case 'TOGGLE_THEME_DARK': {
             return {
                 ...state,

@@ -1,19 +1,21 @@
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PageTemplate from 'src/components/PageTemlate'
 import './style.css'
 import { ThemeContext } from 'src/App'
 import { StyledContainer } from 'src/styled'
 
 const Success = () => {
-  const {theme, toggleTheme} = useContext(ThemeContext);
+  const {state} = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   return (
     <PageTemplate title='Success'>
-        <StyledContainer theme={theme}>
+        <StyledContainer theme={state}>
             <div className='Success__text'>
                 <p>Email confirmed <br /> Your registration in move completed</p>
             </div>
-            <a className='Success__btn' href="#">Go to home</a>
+            <a className='Success__btn' onClick={() => navigate('/blog')}>Go to home</a>
         </StyledContainer>
     </PageTemplate>
   )

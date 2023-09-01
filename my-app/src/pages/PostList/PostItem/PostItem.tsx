@@ -1,11 +1,11 @@
 import React from 'react'
 import PageTemplate from 'src/components/PageTemlate/PageTemplate'
-import BigPost from 'src/components/Post/BigPost'
+import Post from 'src/components/Post'
 
 const PostItem = () => {
   return (
     <PageTemplate>
-        <BigPost />
+        <Post />
     </PageTemplate>
   )
 }

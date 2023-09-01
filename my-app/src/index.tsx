@@ -11,14 +11,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// root.render(
-//   <Router>
-//     <App />
-//   </Router>
-// );
-
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
 );
