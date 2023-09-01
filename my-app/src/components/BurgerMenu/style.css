@@ -1,4 +1,6 @@
 .header__container {
+    position: relative;
+    z-index: 1;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -10,10 +12,10 @@
 
 .burgerMenu {
     border-right: 1px solid white;
+    position: relative;
 }
 
 .burger {
-    position: relative;
     cursor: pointer;
     border: 1px solid white;
     width: 50px;
@@ -27,29 +29,40 @@
 }
 
 .burgerLine {
+    position: relative;
     border: 2px solid white;
     width: 30px;
     border-radius: 10px;
+    transition: all 0.1s ease 0s;
 }
 
-.burgerLine::before {
-    position: absolute;
-    width: 30px;
-    left: 16%;
-    top: 21%;
-    content: "";
-    border: 2px solid white;
-    border-radius: 10px;
-}
-
+.burgerLine::before,
 .burgerLine::after {
     position: absolute;
     width: 30px;
-    left: 16%;
-    top: 70%;
+    left: -6%;
     content: "";
     border: 2px solid white;
+    background-color: white;
     border-radius: 10px;
+    transition: all 0.3s ease 0s;
+}
+.burgerLine::before {
+    top: 9px;
+}
+.burgerLine::after {
+    bottom: 9px;
+}
+.burgerLine.open::before {
+    transform: rotate(45deg);
+    top: -2px
+}
+.burgerLine.open::after {
+    transform: rotate(-45deg);
+    bottom: -2px;
+}
+.burgerLine.open{
+    border: 2px solid rgb(170, 93, 192);
 }
 
 .search {

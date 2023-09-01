@@ -1,7 +1,7 @@
 import React from 'react'
-import AllPost from '../Post/AllPost/AllPost'
-import TabMenu from '../TabMenu/TabMenu'
-import PageTemplate from '../PageTemlate'
+import AllPost from '../../components/Post/AllPost/AllPost'
+import TabMenu from '../../components/TabMenu/TabMenu'
+import PageTemplate from '../../components/PageTemlate'
     
 const PostList = () => {
     return (

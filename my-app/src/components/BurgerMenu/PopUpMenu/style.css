@@ -1,0 +1,14 @@
+.popUpMenu {
+    position: absolute;
+    box-sizing: border-box;
+    content: '';
+    width: 250px;
+    top: 72px;
+    background-color: rgb(170, 93, 192);
+    transition: all 0.3s ease 0s;
+}
+
+.popUpMenu div {
+    padding: 15px;
+    font-size: 20px;
+}
