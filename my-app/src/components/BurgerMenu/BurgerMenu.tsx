@@ -14,6 +14,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
   } 
   useEffect(() => {
     onSubmit(inputValue)
+
   }, [inputValue])
   // console.log(open);
   
