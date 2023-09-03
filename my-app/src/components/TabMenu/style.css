@@ -1,0 +1,31 @@
+.tabs__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tabItem {
+    min-width: 150px;
+    min-height: 25px;
+    padding: 15px 0;
+    text-align: center;
+    text-transform: capitalize;
+    border-bottom: 2px solid rgb(200, 200, 200);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tabItem:nth-child(1) {
+    border-bottom: 2px solid rgb(100, 100, 100);
+}
+
+.tabItemNone {
+    min-height: 25px;
+    padding: 15px 0;
+    border-bottom: 2px solid rgb(200, 200, 200);
+    width: 100%;
+}
+
+.tabItem:hover {
+    color: #AA5DC0;
+}
