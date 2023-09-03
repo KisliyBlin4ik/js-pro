@@ -1,0 +1,133 @@
+.posts__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.post__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+}
+.post__btn {
+    display: flex;
+    gap: 20px;
+}
+
+.posts__items {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(200, 200, 200, 0.29);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.posts__mid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
+}
+.posts__small {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 30%;
+    width: 100%;
+}
+.posts__small .post__content{
+    width: 80%;
+}
+
+
+.post {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    margin: 20px;
+    padding: 10px 0;
+}
+.post__mid {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    margin: 20px;
+    padding: 0 0 10px ;
+}
+.post__small {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    margin: 20px;
+    padding: 0 0 10px ;
+    gap: 10px;
+}
+.post__content {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+}
+.post__small .post__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.post__single__gap {
+    gap: 20px;
+}
+
+.post__title {
+    font-weight: 600;
+    font-size: 20px;
+}
+.post__date {
+    font-size: 16px;
+    color: rgb(193, 193, 193);
+}
+.post__text {
+    font-size: 20px;
+}
+.post__img {
+    font-size: 20px;
+}
+
+
+.post__big .post__image {
+    margin-left: 15px;
+    width: 243px;
+    height: 243px;
+}
+.posts__mid .post__image {
+    width: 100%;
+    height: 100px;
+}
+.posts__small .post__image{
+    width: 75px;
+    height: 75px;
+}
+
+p {
+    padding: 10px;
+}
+
+.serchResults {
+    flex-grow: 1;
+}
+.post__likeDislike, .post__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post__likeDislike span, .post__btn span {
+    cursor: pointer;
+}
+
+.post__likeDislike {
+    gap:10px
+}

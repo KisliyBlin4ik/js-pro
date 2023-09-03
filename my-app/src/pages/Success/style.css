@@ -1,0 +1,27 @@
+/* .Success__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    gap: 30px;
+    padding: 30px;
+    border: 1px solid rgb(210, 209, 209);
+} */
+
+.Success__text {
+    width: 100%;
+    line-height: 1.5;
+}
+
+.Success__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(170, 93, 192);
+}

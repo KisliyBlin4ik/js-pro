@@ -1,0 +1,39 @@
+.PageTemplate {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 70px auto 0;
+    padding: 20px 0;
+}
+
+.PageTemplate .BackToHome {
+    color: rgb(170, 93, 192);
+    font-size: 20px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-top: 1px solid rgb(210, 209, 209);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: space-between;
+}
