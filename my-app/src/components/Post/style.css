@@ -124,8 +124,13 @@ p {
     justify-content: center;
 }
 
-.post__likeDislike span, .post__btn span {
+.post__likeDislike button, .post__btn button {
     cursor: pointer;
+    border: none;
+}
+.post__likeDislike button:active, .post__btn button:active {
+    transition: all 0.3s;
+    transform: scale(1.2);
 }
 
 .post__likeDislike {

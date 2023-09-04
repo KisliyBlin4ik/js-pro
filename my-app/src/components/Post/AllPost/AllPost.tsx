@@ -1,28 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { ThemeContext } from 'src/App'
+import { useSelector } from 'react-redux';
 import { IPost, PostMid, PostSmall } from '../Post'
 import 'src/components/Post/style.css'
-import PopupPost from 'src/components/PopupPost/PopupPost'
 
 const AllPost = () => {
-    const {posts} = useContext(ThemeContext);
+    const posts: IPost[] = useSelector(({posts}) => posts);
     
 
     return (
         <>
         <div className='posts__items'>
                 <div className='posts__mid'>
-                    {posts.map(({title, text, date, image, id}) => (
-                        id < 7 ? <PostMid key={id} title={title} date={date} image={image} id={id}/> : ''
+                    {posts.map(({title, text, date, image, id, likes}) => (
+                        id < 7 ? <PostMid key={id} title={title} date={date} image={image} id={id} likes={likes}/> : ''
                     ))}
                 </div>
             <div className='posts__small'>
-                {posts.map(({title, text, date, image, id}) => (
-                    id > 6 ? <PostSmall key={id} title={title} date={date} image={image} id={id}/> : ''
+                {posts.map(({title, text, date, image, id, likes}) => (
+                    id > 6 ? <PostSmall key={id} title={title} date={date} image={image} id={id} likes={likes}/> : ''
                 ))}
             </div>
         </div>
-        {/* <PopupPost>{'asd'}</PopupPost> */}
         </>
     )
 }

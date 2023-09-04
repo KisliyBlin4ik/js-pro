@@ -1,38 +1,36 @@
-import React, { useState, useEffect, useContext ,FC } from 'react'
+import React, { useContext ,FC } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ThemeContext } from 'src/App'
-import './style.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TOGGLE_POPUP } from 'src/actions/actions';
+import './style.css'
+import { StyledPostBtn } from './styled';
 export interface IPost {
     id: number;
     text?: string;
     date?: string;
     title: string;
     image?: string;
+    likes?: number;
 }
 
 const Post = () => {
-    const {posts} = useContext(ThemeContext);
+    const posts: IPost[] = useSelector(({posts}) => posts);
+    
     const {id} = useParams();
     const {popupId} = useContext(ThemeContext);
-    const dispatch = useDispatch();
+    let selectedPost = +[id];
 
-    console.log(popupId);
-    let selectedPost = +[id]
-    console.log(selectedPost);
     if (popupId) {
         selectedPost = +popupId
     }
     
-
     return (
         <>
             {posts.map(({title, text, date, image, id}) => (
                 (selectedPost === +id ) ? <PostBig key={id} title={title} text={text} image={image} id={selectedPost}/> : 
                 ''
             ))}
-            
         </>
     )
 }
@@ -58,12 +56,13 @@ export const PostBig:FC<IPost> = ({title, text, id, date, image}) => {
     )
 }
 
-export const PostMid:FC<IPost> = ({title, date, id, image}) => {
+export const PostMid:FC<IPost> = ({title, date, id, image, likes}) => {
+    const theme = useSelector(({theme}) => theme);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    console.log(id);
-    
-    
+    const posts = useSelector(({posts}) => posts);
+    const post = posts.filter((post: IPost) => post.id === id);
+    console.log(post);
 
     return (
         <div className='post__mid ' >
@@ -74,20 +73,21 @@ export const PostMid:FC<IPost> = ({title, date, id, image}) => {
             </div>
             <div className='post__footer'>
                 <div className='post__likeDislike'>
-                    <span className='post__like material-symbols-outlined'>thumb_up</span>
-                    <span>0</span>
-                    <span className='post__dislike material-symbols-outlined'>thumb_down</span>
+                    <StyledPostBtn theme={theme} className='post__like material-symbols-outlined' onClick={() => dispatch({type: 'ADD_LIKE', payload: id})}>thumb_up</StyledPostBtn>
+                    <span>{likes || 0}</span>
+                    <StyledPostBtn theme={theme} className='post__dislike material-symbols-outlined' onClick={() => dispatch({type: 'REMOVE_LIKE', payload: id})}>thumb_down</StyledPostBtn>
                 </div>
                 <div className='post__btn'>
-                    <span className='btn__blabla material-symbols-outlined'>bookmark</span>
-                    <span className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</span>
+                    <StyledPostBtn theme={theme} className='btn__blabla material-symbols-outlined'>bookmark</StyledPostBtn>
+                    <StyledPostBtn theme={theme} className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</StyledPostBtn>
                 </div>
             </div>
         </div> 
     )
 }
 
-export const PostSmall:FC<IPost> = ({title, date, id,image}) => {
+export const PostSmall:FC<IPost> = ({title, date, id, image, likes}) => {
+    const theme = useSelector(({theme}) => theme);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -104,13 +104,13 @@ export const PostSmall:FC<IPost> = ({title, date, id,image}) => {
             </div>
             <div className='post__footer'>
                 <div className='post__likeDislike'>
-                    <span className='post__like material-symbols-outlined'>thumb_up</span>
-                    <span>0</span>
-                    <span className='post__dislike material-symbols-outlined'>thumb_down</span>
+                    <StyledPostBtn theme={theme} className='post__like material-symbols-outlined' onClick={() => dispatch({type: 'ADD_LIKE', payload: id})}>thumb_up</StyledPostBtn>
+                    <span>{likes || 0}</span>
+                    <StyledPostBtn theme={theme} className='post__dislike material-symbols-outlined' onClick={() => dispatch({type: 'REMOVE_LIKE', payload: id})}>thumb_down</StyledPostBtn>
                 </div>
                 <div className='post__btn'>
-                    <span className='btn__blabla material-symbols-outlined'>bookmark</span>
-                    <span className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</span>
+                    <StyledPostBtn theme={theme} className='btn__blabla material-symbols-outlined'>bookmark</StyledPostBtn>
+                    <StyledPostBtn theme={theme} className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</StyledPostBtn>
                 </div>
             </div>
         </div> 

@@ -35,13 +35,3 @@ color: ${({theme}) => theme === 'dark_mode' ? '#fff' : '#111'};
 export const StyledPageTemplate = styled.main<{ theme: 'light_mode' | 'dark_mode' }>`
 color: ${({theme}) => theme === 'dark_mode' ? '#fff' : '#1a1a1a'};
 `
-
-export const StyledPopupContent = styled.div<{ theme: 'light_mode' | 'dark_mode' }>`
-background-color: ${({theme}) => theme === 'dark_mode' ? '#1a1a1a' : 'rgb(242, 242, 242)'};
-color: ${({theme}) => theme === 'dark_mode' ? '#fff' : '#111'};
-`
-
-export const StyledPopUpMenu = styled.div<{ openMenu: true | false , theme: 'light_mode' | 'dark_mode' }>`
-left: ${({openMenu}) => openMenu === true ? '0' : '-250px'};
-background-color: ${({theme}) => theme === 'dark_mode' ? '#1a1a1a' : '#fff'};
-`
