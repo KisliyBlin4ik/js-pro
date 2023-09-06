@@ -1,9 +1,10 @@
 import React, {FC, ReactNode, useContext} from 'react'
-import { Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ThemeContext } from 'src/App'
 import { StyledPageTemplate } from 'src/styled';
 import ToggleThemeBtn from './ToggleThemeBtn';
 import './style.css'
+import { useSelector } from 'react-redux';
 
 interface IPageTemplate {
     title?: string;
@@ -11,11 +12,11 @@ interface IPageTemplate {
 }
 
 const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
-  const {state} = useContext(ThemeContext);
+  const theme = useSelector(({theme}) => theme);
   const navigate = useNavigate();
 
   return (
-    <StyledPageTemplate className='PageTemplate' theme={state}>
+    <StyledPageTemplate className='PageTemplate' theme={theme}>
       <>
         <a className='BackToHome' onClick={() => navigate('/blog')}>Back to home</a>
         <div className='titleWrapper'>

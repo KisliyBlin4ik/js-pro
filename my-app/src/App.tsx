@@ -1,32 +1,29 @@
 import React, { createContext, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import BurgerMenu from './components/BurgerMenu';
-import TabMenu from './components/TabMenu';
 import PostList from './pages/PostList';
-import PageTemplate from './components/PageTemlate';
 import Success from './pages/Success';
 import SignIn from './pages/SignIn/SignIn';
 import PostItem from './pages/PostList/PostItem';
+import BurgerMenu from './components/BurgerMenu';
 import SearchPost from './components/Post/SearchPost';
-import MyComponent from './components/Post/Post';
-import AllPost from './components/Post/AllPost/AllPost';
-import { StyledWrapper } from './styled';
-import Counter from './components/Counter';
-import { initialState } from './store/store';
+import Post from './components/Post/Post';
 import { IPost } from './components/Post/Post';
+import PostOnlyImage from './components/Post/PostOnlyImage/PostOnlyImage';
+import PopupPost from './components/PopupPost/PopupPost';
+import { StyledWrapper } from './styled';
 import './App.css';
 
 interface IThemeContext {
-  state: "light_mode" | "dark_mode";
+  popupIsOpen: 'open' | 'close';
+  popupId: number | null;
   posts: IPost[] | [];
 }
 
-export const ThemeContext = createContext<IThemeContext>({state: 'light_mode', posts: []});
+export const ThemeContext = createContext<IThemeContext>({ popupIsOpen: 'close', posts: [], popupId: null});
 
 function App() {
   const [posts, setArrPost] = useState<IPost[]>([]);
-
   const fetchPost = async () => {
       const response = await fetch('https://64f101948a8b66ecf77a538e.mockapi.io/postsForReact/posts');
       const data = await response.json();
@@ -37,21 +34,20 @@ function App() {
   }, [])
 
   const [inputData, setInputData] = useState('');
-
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
 
-  const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location);
-  // console.log(theme);
-  const state = useSelector(({theme}) => theme)
-  console.log(state);
+
+  const theme = useSelector(({theme}) => theme)
+  let popupId = useSelector(({popupInfo}) => popupInfo.id)
+  let popupIsOpen = useSelector(({popupInfo}) => popupInfo.isOpen)
+  let popupImage = useSelector(({popupInfo}) => popupInfo.image)
 
   return (
-    <ThemeContext.Provider value={{state, posts}}>
-    <StyledWrapper className='wrapper' theme={state}>
+    <ThemeContext.Provider value={{ popupIsOpen, posts, popupId}}>
+    <StyledWrapper className='wrapper' theme={theme}>
       <header>
         <BurgerMenu onSubmit={handleInputSubmit}/>
         {/* <Link to="/blog">blog</Link> */}
@@ -63,6 +59,12 @@ function App() {
         <Route path='/success' element={<Success />}></Route>
         <Route path='/search' element={<SearchPost inputData={inputData}/>}></Route>
       </Routes>
+      {
+      (popupIsOpen === 'open' && popupId && !popupImage) ? <PopupPost>{<Post/>}</PopupPost> :
+      (popupIsOpen === 'open' && popupId && popupImage) ? <PopupPost>{<PostOnlyImage/>}</PopupPost> : 
+      ''
+      }
+      
       {location.pathname === '/' && <Navigate to='blog'/>}
     </StyledWrapper>
   </ThemeContext.Provider>

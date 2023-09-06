@@ -4,9 +4,10 @@ import TabMenu from '../../components/TabMenu/TabMenu'
 import PageTemplate from '../../components/PageTemlate'
     
 const PostList = () => {
+    
     return (
         <PageTemplate title='Blog'>
-            <div className='post__container'>
+            <div className='posts__container'>
                 <TabMenu />
                 <AllPost />
             </div>

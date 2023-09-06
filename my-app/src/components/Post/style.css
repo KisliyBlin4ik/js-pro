@@ -1,22 +1,21 @@
-.post__container {
+.posts__container {
     display: flex;
     flex-direction: column;
-    /* max-width: 100vh; */
     width: 100%;
     gap: 20px;
 }
 
-.post__btn {
-    margin: 10px auto 0;
-    cursor: pointer;
-    font-size: 20px;
-    border: 1px solid rgb(200, 200, 200);
+.post__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
 }
-.post__btn:active {
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+.post__btn {
+    display: flex;
+    gap: 20px;
 }
 
-.post__items {
+.posts__items {
     display: flex;
     justify-content: space-between;
     background-color: rgba(200, 200, 200, 0.29);
@@ -24,26 +23,20 @@
     box-sizing: border-box;
 }
 
-.post__item__left {
-    display: flex;
-    flex-direction: column;
-    max-width: 70%;
-    width: 100%;
-}
-
-.post__mid {
+.posts__mid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 20px;
 }
-.post__small {
+.posts__small {
     display: flex;
     flex-direction: column;
     gap: 20px;
     max-width: 30%;
     width: 100%;
 }
-.post__small .post__content{
+.posts__small .post__content{
     width: 80%;
 }
 
@@ -55,9 +48,34 @@
     margin: 20px;
     padding: 10px 0;
 }
+.post__mid {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    margin: 20px;
+    padding: 0 0 10px ;
+}
+.post__small {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(210, 209, 209);
+    margin: 20px;
+    padding: 0 0 10px ;
+    gap: 10px;
+}
 .post__content {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+
+}
+.post__small .post__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 .post__single__gap {
     gap: 20px;
@@ -84,11 +102,11 @@
     width: 243px;
     height: 243px;
 }
-.post__mid .post__image {
+.posts__mid .post__image {
     width: 100%;
     height: 100px;
 }
-.post__small .post__image{
+.posts__small .post__image{
     width: 75px;
     height: 75px;
 }
@@ -99,4 +117,17 @@ p {
 
 .serchResults {
     flex-grow: 1;
+}
+.post__likeDislike, .post__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post__likeDislike span, .post__btn span {
+    cursor: pointer;
+}
+
+.post__likeDislike {
+    gap:10px
 }

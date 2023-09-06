@@ -16,8 +16,8 @@ const BurgerMenu = ({ onSubmit }: any) => {
     onSubmit(inputValue)
 
   }, [inputValue])
-  console.log(open);
-
+  // console.log(open);
+  
   return (
     <div className='header__container'>
         <div className='burgerMenu' >

@@ -14,7 +14,7 @@ const SearchPost = ({ inputData }: any) => {
     <PageTemplate>
         <h1>Search results '{inputData}'</h1>
       <div className='serchResults'>
-        {inputData.length >= 2 ? filteredPosts.map((post, index) => <PostMid title={post.title} id={index} image={post.image} key={index}/>) : null}
+        {inputData.length >= 2 ? filteredPosts.map((post) => <PostMid title={post.title} id={post.id} image={post.image} key={post.id}/>) : null}
       </div>
     </PageTemplate>
   )
