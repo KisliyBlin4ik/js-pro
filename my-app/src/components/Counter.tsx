@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { INCREMENT_CREATOR } from 'src/actions/actions';
-import { useSelector, useDispatch, connect } from 'react-redux'
+import React, { Component } from "react";
+import { INCREMENT_CREATOR } from "src/actions/actions";
+import { useSelector, useDispatch, connect } from "react-redux";
 
 // class Counter extends Component {
 //     render() {
 //         const state = this.props;
 
 //         console.log(state);
-        
+
 //         return (
 //             <div>
 //                 {/* @ts-expect-error */}
@@ -34,22 +34,20 @@ import { useSelector, useDispatch, connect } from 'react-redux'
 
 // export default connect(mapStateToProps)(Counter)
 
-
 // import React from 'react'
 
 const Counter = () => {
-    const counter = useSelector((state: any) => state.count)
+  const counter = useSelector((state: any) => state.count);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   return (
     <div>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
-        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
-        <br />
-        <span>Counter {counter}</span>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+      <br />
+      <span>Counter {counter}</span>
     </div>
-  )
-}
+  );
+};
 
-export default Counter
-
+export default Counter;

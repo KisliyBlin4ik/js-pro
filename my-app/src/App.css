@@ -3,7 +3,10 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#root, body, html, .wrapper {
+#root,
+body,
+html,
+.wrapper {
   height: 100%;
 }
 
