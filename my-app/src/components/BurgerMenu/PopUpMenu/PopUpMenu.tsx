@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
-import { StyledPopUpMenu } from 'src/styled'
+import { StyledPopUpMenu } from './styled'
 import ToggleThemeBtn from 'src/components/PageTemlate/ToggleThemeBtn/ToggleThemeBtn'
 import { StyledPopUpMenuItem } from './styled'
 import { useSelector } from 'react-redux'

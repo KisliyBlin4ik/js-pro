@@ -1,12 +1,11 @@
-import React, { createContext, useState, useContext, useEffect, Dispatch, SetStateAction , FC} from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, FC} from 'react';
 import { ThemeContext } from 'src/App';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TOGGLE_POPUP } from 'src/actions/actions';
 import { IPost } from '../Post';
 
 const PostOnlyImage = () => {
-    const {posts} = useContext(ThemeContext);
+    const posts: IPost[] = useSelector(({posts}) => posts);
     const {popupId} = useContext(ThemeContext);
 
   return (

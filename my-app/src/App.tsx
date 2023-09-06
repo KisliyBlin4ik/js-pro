@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PostList from './pages/PostList';
 import Success from './pages/Success';
 import SignIn from './pages/SignIn/SignIn';
@@ -15,19 +15,18 @@ import { StyledWrapper } from './styled';
 import './App.css';
 
 interface IThemeContext {
-  popupIsOpen: 'open' | 'close';
   popupId: number | null;
-  posts: IPost[] | [];
 }
 
-export const ThemeContext = createContext<IThemeContext>({ popupIsOpen: 'close', posts: [], popupId: null});
+export const ThemeContext = createContext<IThemeContext>({popupId: null});
 
 function App() {
-  const [posts, setArrPost] = useState<IPost[]>([]);
+  const dispatch = useDispatch();
+
   const fetchPost = async () => {
       const response = await fetch('https://64f101948a8b66ecf77a538e.mockapi.io/postsForReact/posts');
       const data = await response.json();
-      setArrPost(data);
+      dispatch({type: 'SET_POSTS', payload: data})
   };
   useEffect(() => {
       fetchPost()
@@ -37,20 +36,18 @@ function App() {
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
-
+  
   const location = useLocation();
-
   const theme = useSelector(({theme}) => theme)
-  let popupId = useSelector(({popupInfo}) => popupInfo.id)
-  let popupIsOpen = useSelector(({popupInfo}) => popupInfo.isOpen)
-  let popupImage = useSelector(({popupInfo}) => popupInfo.image)
+  const popupId = useSelector(({popupInfo}) => popupInfo.id)
+  const popupIsOpen = useSelector(({popupInfo}) => popupInfo.isOpen)
+  const popupImage = useSelector(({popupInfo}) => popupInfo.image)
 
   return (
-    <ThemeContext.Provider value={{ popupIsOpen, posts, popupId}}>
+    <ThemeContext.Provider value={{popupId}}>
     <StyledWrapper className='wrapper' theme={theme}>
       <header>
         <BurgerMenu onSubmit={handleInputSubmit}/>
-        {/* <Link to="/blog">blog</Link> */}
       </header>
       <Routes>
         <Route path='/blog' element={<PostList />}></Route>
@@ -64,7 +61,6 @@ function App() {
       (popupIsOpen === 'open' && popupId && popupImage) ? <PopupPost>{<PostOnlyImage/>}</PopupPost> : 
       ''
       }
-      
       {location.pathname === '/' && <Navigate to='blog'/>}
     </StyledWrapper>
   </ThemeContext.Provider>
