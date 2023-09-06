@@ -8,7 +8,7 @@ padding: 23px;
 font-size: 20px;
 `
 
-export const StyledPopUpMenu = styled.div<{ openMenu: true | false , theme: 'light_mode' | 'dark_mode' }>`
-left: ${({openMenu}) => openMenu === true ? '0' : '-250px'};
+export const StyledPopUpMenu = styled.div<{ openmenu: true | false , theme: 'light_mode' | 'dark_mode' }>`
+left: ${({openmenu}) => openmenu === true ? '0' : '-250px'};
 background-color: ${({theme}) => theme === 'dark_mode' ? '#1a1a1a' : '#fff'};
 `

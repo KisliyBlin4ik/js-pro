@@ -1,4 +1,5 @@
-import { legacy_createStore as createStore } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 export const initialState = {
@@ -9,6 +10,12 @@ export const initialState = {
         image: null,
     },
     posts: [],
+    user: {
+        username: '',
+        email: '',
+        id: null,
+      },
+    isLoading: false,
 };
 
 const rootReducer = (state = initialState, action: any) => {
@@ -33,6 +40,18 @@ const rootReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 posts: action.payload
+            }
+        }
+        case 'SET_USER': {
+            return {
+                ...state,
+                user: action.payload
+            }
+        }
+        case 'SET_LOADING': {
+            return {
+                ...state,
+                isLoading: !state.isLoading,
             }
         }
         case 'ADD_LIKE': {
@@ -61,11 +80,43 @@ const rootReducer = (state = initialState, action: any) => {
                 })
             }
         }
+        case 'ADD_FAVORITE': {
+            return {
+                ...state,
+                posts: state.posts.map((post: {id: number, isFavorite?: boolean}) => {
+                    if (post.id === action.payload) {
+                        // post.likes ? post.likes-- : (post.likes = 0);
+                        post = {
+                            ...post, 
+                            isFavorite: post.isFavorite ? false : true,
+                        }
+                        return post
+                    }
+                    return post
+                })
+            }
+        }
+        // case 'REMOVE_FAVORITE': {
+        //     return {
+        //         ...state,
+        //         posts: state.posts.map((post: {id: number, likes?: number}) => {
+        //             if (post.id === action.payload) {
+        //                 // post.likes ? post.likes-- : (post.likes = 0);
+        //                 post = {...post, likes: post.likes !== undefined && post.likes > 0 ? post.likes - 1 : 0}
+        //                 return post
+        //             }
+        //             return post
+        //         })
+        //     }
+        // }
         default:
             return state;
     }
 };
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunk)
+));
 
 export default store;

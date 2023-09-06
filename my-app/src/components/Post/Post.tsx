@@ -12,6 +12,12 @@ export interface IPost {
     title: string;
     image?: string;
     likes?: number;
+    isFavorite?: boolean;
+}
+export interface IUser {
+    username: string;
+    email: string;
+    password: string;
 }
 
 const Post = () => {
@@ -58,6 +64,7 @@ export const PostBig:FC<IPost> = ({title, text, id, date, image}) => {
 
 export const PostMid:FC<IPost> = ({title, date, id, image, likes}) => {
     const theme = useSelector(({theme}) => theme);
+    const favorite = useSelector(({isFavorite}) => isFavorite);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const posts = useSelector(({posts}) => posts);
@@ -78,7 +85,7 @@ export const PostMid:FC<IPost> = ({title, date, id, image, likes}) => {
                     <StyledPostBtn theme={theme} className='post__dislike material-symbols-outlined' onClick={() => dispatch({type: 'REMOVE_LIKE', payload: id})}>thumb_down</StyledPostBtn>
                 </div>
                 <div className='post__btn'>
-                    <StyledPostBtn theme={theme} className='btn__blabla material-symbols-outlined'>bookmark</StyledPostBtn>
+                    <StyledPostBtn theme={theme} className='btn__favorite material-symbols-outlined' onClick={() => dispatch({type: 'ADD_FAVORITE', payload: id})}>bookmark</StyledPostBtn>
                     <StyledPostBtn theme={theme} className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</StyledPostBtn>
                 </div>
             </div>
@@ -109,7 +116,7 @@ export const PostSmall:FC<IPost> = ({title, date, id, image, likes}) => {
                     <StyledPostBtn theme={theme} className='post__dislike material-symbols-outlined' onClick={() => dispatch({type: 'REMOVE_LIKE', payload: id})}>thumb_down</StyledPostBtn>
                 </div>
                 <div className='post__btn'>
-                    <StyledPostBtn theme={theme} className='btn__blabla material-symbols-outlined'>bookmark</StyledPostBtn>
+                    <StyledPostBtn theme={theme} className='btn__favorite material-symbols-outlined' onClick={() => dispatch({type: 'ADD_FAVORITE', payload: id})}>bookmark</StyledPostBtn>
                     <StyledPostBtn theme={theme} className='btn__popup material-symbols-outlined' onClick={() => navigate(`/blog/${id}`)}>more_horiz</StyledPostBtn>
                 </div>
             </div>

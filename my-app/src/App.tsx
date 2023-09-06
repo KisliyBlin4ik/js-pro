@@ -13,6 +13,7 @@ import PostOnlyImage from './components/Post/PostOnlyImage/PostOnlyImage';
 import PopupPost from './components/PopupPost/PopupPost';
 import { StyledWrapper } from './styled';
 import './App.css';
+import { FETCH_POSTS } from './actions/actions';
 
 interface IThemeContext {
   popupId: number | null;
@@ -29,7 +30,9 @@ function App() {
       dispatch({type: 'SET_POSTS', payload: data})
   };
   useEffect(() => {
-      fetchPost()
+      // fetchPost()
+      // @ts-expect-error
+      dispatch(FETCH_POSTS())
   }, [])
 
   const [inputData, setInputData] = useState('');
