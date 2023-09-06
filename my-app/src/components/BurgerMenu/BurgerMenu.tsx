@@ -23,7 +23,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
         <div className='burgerMenu' >
             <div className='burger' onClick={() => {setOpen(open ? false : true)}}>
                 <span className={`burgerLine ${open ? 'open' : ''}`} ></span>
-                <PopUpMenu openMenu={open}/>
+                <PopUpMenu openmenu={open}/>
             </div>
         </div>
         <div className='search'>

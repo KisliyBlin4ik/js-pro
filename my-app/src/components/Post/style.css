@@ -26,13 +26,11 @@
 .posts__mid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px;
 }
 .posts__small {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
     max-width: 30%;
     width: 100%;
 }

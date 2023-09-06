@@ -6,14 +6,14 @@ import ToggleThemeBtn from 'src/components/PageTemlate/ToggleThemeBtn/ToggleThem
 import { StyledPopUpMenuItem } from './styled'
 import { useSelector } from 'react-redux'
 
-const PopUpMenu = ({openMenu}:any) => {
+const PopUpMenu = ({openmenu}:any) => {
   const navigate = useNavigate();
   const theme = useSelector(({theme}) => theme);
 
 
 
   return (
-    <StyledPopUpMenu theme={theme} className='popUpMenu' openMenu={openMenu}>
+    <StyledPopUpMenu theme={theme} className='popUpMenu' openmenu={openmenu}>
       <div className='popUpMenu__item'>
         <div>User</div>
         <StyledPopUpMenuItem theme={theme} onClick={() => navigate('/blog')}>Home</StyledPopUpMenuItem>

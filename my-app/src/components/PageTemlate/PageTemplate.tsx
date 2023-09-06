@@ -1,18 +1,20 @@
-import React, {FC, ReactNode, useContext} from 'react'
+import React, { FC, ReactNode, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ThemeContext } from 'src/App'
 import { StyledPageTemplate } from 'src/styled';
 import ToggleThemeBtn from './ToggleThemeBtn';
 import './style.css'
 import { useSelector } from 'react-redux';
+import Loader from '../Loader/Loader';
 
 interface IPageTemplate {
-    title?: string;
-    children: ReactNode;
+  title?: string;
+  children: ReactNode;
 }
 
-const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
-  const theme = useSelector(({theme}) => theme);
+const PageTemplate: FC<IPageTemplate> = ({ title, children }) => {
+  const theme = useSelector(({ theme }) => theme);
+  const isLoading = useSelector(({ isLoading }) => isLoading);
   const navigate = useNavigate();
 
   return (
@@ -20,9 +22,9 @@ const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
       <>
         <a className='BackToHome' onClick={() => navigate('/blog')}>Back to home</a>
         <div className='titleWrapper'>
-            <h1>{title}</h1>
+          <h1>{title}</h1>
         </div>
-        <div className='content'>{children}</div>
+        <div className='content'>{isLoading ? <Loader /> : children}</div>
       </>
       <footer>
         <span>2022</span>
