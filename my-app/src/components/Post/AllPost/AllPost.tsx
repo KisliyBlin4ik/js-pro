@@ -12,12 +12,12 @@ const AllPost = () => {
             <div className='posts__items'>
                 <div className='posts__mid'>
                     {posts.map(({ title, text, date, image, id, likes, isFavorite }) => (
-                        id < 7 ? <PostMid key={id} title={title} date={date} image={image} id={id} likes={likes} isFavorite={isFavorite} /> : ''
+                        id ? <PostMid key={id} title={title} date={date} image={image} id={id} likes={likes} isFavorite={isFavorite} /> : ''
                     ))}
                 </div>
                 <div className='posts__small'>
                     {posts.map(({ title, text, date, image, id, likes, isFavorite }) => (
-                        id > 6 ? <PostSmall key={id} title={title} date={date} image={image} id={id} likes={likes} isFavorite={isFavorite} /> : ''
+                        id ? <PostSmall key={id} title={title} date={date} image={image} id={id} likes={likes} isFavorite={isFavorite} /> : ''
                     ))}
                 </div>
             </div>

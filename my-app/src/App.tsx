@@ -25,9 +25,11 @@ function App() {
   const dispatch = useDispatch();
 
   const fetchPost = async () => {
-      const response = await fetch('https://64f101948a8b66ecf77a538e.mockapi.io/postsForReact/posts');
+      const response = await fetch('https://studapi.teachmeskills.by/blog/posts/?lesson_num=2023&limit=20');
+      // https://64f101948a8b66ecf77a538e.mockapi.io/postsForReact/posts
       const data = await response.json();
-      dispatch({type: 'SET_POSTS', payload: data})
+      const results = data.results
+      dispatch({type: 'SET_POSTS', payload: results})
   };
   useEffect(() => {
       // fetchPost()
