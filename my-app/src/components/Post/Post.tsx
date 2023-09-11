@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ThemeContext } from "src/App";
 
-import { TOGGLE_POPUP } from "src/actions/actions";
+import { FETCH_POST, TOGGLE_POPUP } from "src/actions/actions";
 
 import { StyledPostBtn } from "./styled";
 import "./style.css";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 export interface IPost {
   id: number;
   text?: string;
@@ -26,10 +28,13 @@ export interface IUser {
 
 const Post = () => {
   const posts: IPost[] = useSelector(({ posts }) => posts);
-
+  const postItem = useSelector(({ post }) => post);
   const { id } = useParams();
   const { popupId } = useContext(ThemeContext);
   let selectedPost = +[id];
+  // console.log(id);
+  // console.log(postItem[0].id);
+  console.log(popupId);
 
   if (popupId) {
     selectedPost = +popupId;
@@ -54,48 +59,80 @@ const Post = () => {
   );
 };
 
-export const PostBig: FC<IPost> = ({ title, text, id, date, image }) => {
-  const dispatch = useDispatch();
+export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
+  const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
+  const theme = useSelector(({ theme }) => theme);
+  const navigate = useNavigate();
 
   return (
-    <div className="post">
-      <div className="post__content post__single__gap">
-        <h1 className="post__title">{title}</h1>
-        <div
-          className="post__image"
-          onClick={() =>
-            dispatch(TOGGLE_POPUP({ isOpen: "open", id: id, image: image }))
-          }
-        >
-          <img src={image} alt="image" />
-        </div>
-        {text ? <p className="post__text">{text}</p> : null}
-        <div className="post__footer">
-          <button
+    <>
+      <div className="post">
+        <div className="post__content post__single__gap">
+          <h1 className="post__title">{title}</h1>
+          <div
+            className="post__image"
             onClick={() =>
-              dispatch(TOGGLE_POPUP({ isOpen: "open", id: id - 1 }))
+              dispatch(TOGGLE_POPUP({ isOpen: "open", id: id, image: image }))
             }
           >
-            left
-          </button>
-          <button
-            onClick={() =>
-              dispatch(TOGGLE_POPUP({ isOpen: "open", id: id + 1 }))
-            }
-          >
-            right
-          </button>
+            <img src={image} alt="image" />
+          </div>
+          {text ? <p className="post__text">{text}</p> : null}
+
+          <div className="post__footer">
+            <div className="post__likeDislike">
+              <StyledPostBtn
+                theme={theme}
+                className="post__like material-symbols-outlined"
+                onClick={() => dispatch({ type: "ADD_LIKE", payload: id })}
+              >
+                thumb_up
+              </StyledPostBtn>
+              <span>{likes || 0}</span>
+              <StyledPostBtn
+                theme={theme}
+                className="post__dislike material-symbols-outlined"
+                onClick={() => dispatch({ type: "REMOVE_LIKE", payload: id })}
+              >
+                thumb_down
+              </StyledPostBtn>
+            </div>
+            <div className="post__btn">
+              <StyledPostBtn
+                theme={theme}
+                className="btn__favorite material-symbols-outlined"
+                onClick={() => dispatch({ type: "ADD_FAVORITE", payload: id })}
+              >
+                bookmark
+              </StyledPostBtn>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="post__footer">
+        <button
+          onClick={() => dispatch(TOGGLE_POPUP({ isOpen: "open", id: id - 1 }))}
+        >
+          left
+        </button>
+        <button
+          onClick={() => dispatch(TOGGLE_POPUP({ isOpen: "open", id: id + 1 }))}
+        >
+          right
+        </button>
+      </div>
+    </>
   );
 };
 
 export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
+  console.log(id);
+
   const theme = useSelector(({ theme }) => theme);
+  const postItem = useSelector(({ post }) => post);
   const favorite = useSelector(({ isFavorite }) => isFavorite);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
   const posts = useSelector(({ posts }) => posts);
   const post = posts.filter((post: IPost) => post.id === id);
   console.log(post);
@@ -141,7 +178,8 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
           <StyledPostBtn
             theme={theme}
             className="btn__popup material-symbols-outlined"
-            onClick={() => navigate(`/blog/${id}`)}
+            // onClick={() => navigate(`/blog/${id}`)}
+            onClick={() => dispatch(FETCH_POST(navigate, id))}
           >
             more_horiz
           </StyledPostBtn>
@@ -154,7 +192,7 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
 export const PostSmall: FC<IPost> = ({ title, date, id, image, likes }) => {
   const theme = useSelector(({ theme }) => theme);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
 
   return (
     <div className="post__small">
@@ -199,7 +237,8 @@ export const PostSmall: FC<IPost> = ({ title, date, id, image, likes }) => {
           <StyledPostBtn
             theme={theme}
             className="btn__popup material-symbols-outlined"
-            onClick={() => navigate(`/blog/${id}`)}
+            // onClick={() => navigate(`/blog/${id}`)}
+            onClick={() => dispatch(FETCH_POST(navigate, id))}
           >
             more_horiz
           </StyledPostBtn>

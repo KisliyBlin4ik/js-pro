@@ -10,6 +10,16 @@ export const initialState = {
     image: null,
   },
   posts: [],
+  post: {
+    id: 0,
+    image: "string",
+    text: "string",
+    date: "2023-09-10",
+    lesson_num: 0,
+    title: "string",
+    description: "string",
+    author: 0
+  },
   user: {
     username: "",
     email: "",
@@ -35,12 +45,19 @@ const rootReducer = (state = initialState, action: any) => {
           id: action.payload.id,
           image: action.payload.image,
         },
+        
       };
     }
     case "SET_POSTS": {
       return {
         ...state,
         posts: action.payload,
+      };
+    }
+    case "SET_POST": {
+      return {
+        ...state,
+        post: action.payload,
       };
     }
     case "SET_USER": {
