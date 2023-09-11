@@ -26,6 +26,7 @@
 .posts__mid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: start;
 }
 .posts__small {
     display: flex;
@@ -100,9 +101,9 @@
     width: 243px;
     height: 243px;
 }
-.posts__mid .post__image {
-    width: 100%;
-    height: 100px;
+.posts__mid .post__mid__image {
+    max-height: 350px;
+    overflow: hidden;
 }
 .posts__small .post__image{
     width: 75px;
