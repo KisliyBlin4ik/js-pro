@@ -72,6 +72,12 @@ const rootReducer = (state = initialState, action: any) => {
         user: { ...state.user, isActivated: true },
       };
     }
+    case "SET_SIGN_IN": {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
     case "SET_LOADING": {
       return {
         ...state,

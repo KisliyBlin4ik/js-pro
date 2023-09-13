@@ -104,3 +104,65 @@ export const CREATE_USER = (payload: IUser) => {
     }
   };
 };
+
+export const SIGN_IN = (navigate: any, email: string, password: string) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+
+    const signIn = async () => {
+      try {
+        const response = await fetch(
+          "https://studapi.teachmeskills.by/auth/jwt/create/",
+          {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+          .then((data) => data.json())
+          .then((data) => {
+            console.log(data);
+            if (data.access) {
+              navigate("/blog");
+              localStorage.setItem("access", data.access);
+            } else {
+              console.log("Неверные логин или пароль");
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        dispatch({ type: "SET_LOADING" });
+      }
+    };
+    signIn();
+  };
+};
+
+export const SIGN_IN_USER = (token: string) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+
+    const signInUser = async () => {
+      try {
+        let data = await fetch(
+          "https://studapi.teachmeskills.by/auth/users/me/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        ).then((data) => data.json());
+        dispatch({ type: "SET_SIGN_IN", payload: data });
+
+        // localStorage.setItem("123", data.username);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        dispatch({ type: "SET_LOADING" });
+      }
+    };
+    signInUser();
+  };
+};

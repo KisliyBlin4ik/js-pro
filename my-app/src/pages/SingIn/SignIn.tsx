@@ -6,12 +6,12 @@ import { ThunkDispatch } from "redux-thunk";
 
 import PageTemplate from "src/components/PageTemlate";
 import Input from "src/components/Input/Input";
-import { CREATE_USER } from "src/actions/actions";
+import { CREATE_USER, SIGN_IN } from "src/actions/actions";
 
 import { StyledForm } from "src/styled";
 import "./style.css";
 
-const SignUp = () => {
+const SignIn = () => {
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
 
   const theme = useSelector(({ theme }) => theme);
@@ -21,18 +21,11 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  console.log(name);
+//   console.log(name);
 
   return (
-    <PageTemplate title="Sign Up">
+    <PageTemplate title="Sign In">
       <StyledForm className="form" theme={theme}>
-        <Input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          label="Name"
-          onChange={setName}
-        />
         <Input
           type="text"
           placeholder="Your email"
@@ -47,26 +40,15 @@ const SignUp = () => {
           label="Password"
           onChange={setPassword}
         />
-        <Input
-          type="password"
-          placeholder="Confirm Your Password"
-          value={confirmPassword}
-          label="ConfirmPassword"
-          onChange={setConfirmPassword}
-        />
         <button
           className="signInBtn"
-          onClick={() =>
-            dispatch(
-              CREATE_USER({ username: name, email, password, confirmPassword })
-            )
-          }
+          onClick={() => dispatch(SIGN_IN(navigate, email, password))}
         >
-          Sign Up
+          Sign In
         </button>
       </StyledForm>
     </PageTemplate>
   );
 };
 
-export default SignUp;
+export default SignIn;

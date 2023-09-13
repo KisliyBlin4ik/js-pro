@@ -15,11 +15,12 @@ import Post from "./components/Post";
 import PostOnlyImage from "./components/Post/PostOnlyImage";
 import PopupPost from "./components/PopupPost";
 
-import { FETCH_POSTS } from "./actions/actions";
+import { FETCH_POSTS, SIGN_IN_USER } from "./actions/actions";
 
 import { StyledWrapper } from "./styled";
 import "./App.css";
 import ActivateUser from "./components/ActivateUser/ActivateUser";
+import SignIn from "./pages/SingIn/SignIn";
 
 interface IThemeContext {
   popupId: number | null;
@@ -30,8 +31,14 @@ export const ThemeContext = createContext<IThemeContext>({ popupId: null });
 function App() {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
 
+  const token = localStorage.getItem("access");
+  console.log(token);
+
   useEffect(() => {
     dispatch(FETCH_POSTS());
+    if (token) {
+      dispatch(SIGN_IN_USER(token));
+    }
   }, []);
 
   const [inputData, setInputData] = useState("");
@@ -52,14 +59,19 @@ function App() {
           <BurgerMenu onSubmit={handleInputSubmit} />
         </header>
         <Routes>
-          <Route
-            path="/activate/:uid/:token"
-            element={<ActivateUser />}
-          ></Route>
+          {!token && (
+            <>
+              <Route
+                path="/activate/:uid/:token"
+                element={<ActivateUser />}
+              ></Route>
+              <Route path="/signUp" element={<SignUp />}></Route>
+              <Route path="/signIn" element={<SignIn />}></Route>
+              <Route path="/success" element={<Success />}></Route>
+            </>
+          )}
           <Route path="/blog" element={<PostList />}></Route>
           <Route path="/blog/:id" element={<PostItem />}></Route>
-          <Route path="/signUp" element={<SignUp />}></Route>
-          <Route path="/success" element={<Success />}></Route>
           <Route
             path="/search"
             element={<SearchPost inputData={inputData} />}

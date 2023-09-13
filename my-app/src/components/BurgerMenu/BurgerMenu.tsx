@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PopUpMenu from "./PopUpMenu";
 
 import "./style.css";
+import { useSelector } from "react-redux";
 
 const BurgerMenu = ({ onSubmit }: any) => {
   const [inputValue, setInputValue] = useState("");
@@ -18,6 +19,8 @@ const BurgerMenu = ({ onSubmit }: any) => {
   }, [inputValue]);
   // console.log(open);
 
+  const userName = useSelector(({ user }) => user.username);
+
   return (
     <div className="header__container">
       <div className="burgerMenu">
@@ -28,7 +31,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
           }}
         >
           <span className={`burgerLine ${open ? "open" : ""}`}></span>
-          <PopUpMenu openmenu={open} />
+          <PopUpMenu openmenu={open} userName={userName} />
         </div>
       </div>
       <div className="search">
@@ -44,7 +47,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
         </a>
       </div>
       <div className="userName">
-        <span>artem malkin</span>
+        <span>{userName}</span>
       </div>
     </div>
   );
