@@ -126,7 +126,7 @@ export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
 };
 
 export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
-  console.log(id);
+  // console.log(id);
 
   const theme = useSelector(({ theme }) => theme);
   const postItem = useSelector(({ post }) => post);
@@ -135,7 +135,7 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
   const posts = useSelector(({ posts }) => posts);
   const post = posts.filter((post: IPost) => post.id === id);
-  console.log(post);
+  // console.log(post);
 
   return (
     <div className="post__mid ">
