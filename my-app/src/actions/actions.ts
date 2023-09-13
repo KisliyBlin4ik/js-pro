@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import { IUser } from "src/components/Post/Post";
+import { IPost, IUser } from "src/components/Post/Post";
 
 export const INCREMENT_CREATOR = (payload: number) => ({
   type: "INCREMENT",
@@ -36,6 +36,24 @@ export const FETCH_POSTS = () => {
   };
 };
 
+export const FETCH_POST = (navigate: any, id: any) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+    const fetchPost = async () => {
+      const response = await fetch(
+        "https://studapi.teachmeskills.by/blog/posts/?lesson_num=2023&limit=17"
+      );
+      const data = await response.json();
+      const results = data.results;
+      const post = results.filter((post: IPost) => post.id === id);
+      dispatch({ type: "SET_POST", payload: post });
+      navigate(`/blog/${id}`);
+      dispatch({ type: "SET_LOADING" });
+    };
+    fetchPost();
+  };
+};
+
 export const ACTIVATE_USER = (navigate: any, uid: string, token: string) => {
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
     dispatch({ type: "SET_LOADING" });
@@ -61,6 +79,7 @@ export const ACTIVATE_USER = (navigate: any, uid: string, token: string) => {
     activateUser();
   };
 };
+// http://localhost:3000/activate/NzAyNQ/bu4c5c-679ce67baf4e6180a1440c80c8582e69 для входа
 
 export const CREATE_USER = (payload: IUser) => {
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
@@ -85,5 +104,3 @@ export const CREATE_USER = (payload: IUser) => {
     }
   };
 };
-
-// http://localhost:3000/activate/NzAyNQ/bu4c5c-679ce67baf4e6180a1440c80c8582e69 для входа

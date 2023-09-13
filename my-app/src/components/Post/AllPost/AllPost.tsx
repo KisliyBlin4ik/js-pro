@@ -13,7 +13,7 @@ const AllPost = () => {
       <div className="posts__items">
         <div className="posts__mid">
           {posts.map(({ title, text, date, image, id, likes, isFavorite }) =>
-            id ? (
+            id <= 6 ? (
               <PostMid
                 key={id}
                 title={title}
@@ -30,7 +30,7 @@ const AllPost = () => {
         </div>
         <div className="posts__small">
           {posts.map(({ title, text, date, image, id, likes, isFavorite }) =>
-            id ? (
+            id >= 7 ? (
               <PostSmall
                 key={id}
                 title={title}
