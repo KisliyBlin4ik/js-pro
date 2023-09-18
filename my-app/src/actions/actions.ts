@@ -1,5 +1,6 @@
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import instance from "src/axiosConfig";
 import { IPost, IUser } from "src/components/Post/Post";
 
 export const INCREMENT_CREATOR = (payload: number) => ({
@@ -10,6 +11,10 @@ export const TOGGLE_THEME = (payload: string) => ({
   type: "TOGGLE_THEME",
   payload,
 });
+export const TOGGLE_OPEN = (payload: string) => ({
+  type: "TOGGLE_OPEN",
+  payload,
+});
 export const TOGGLE_POPUP = (payload: any) => ({
   type: "TOGGLE_POPUP",
   payload,
@@ -18,21 +23,26 @@ export const ADD_FAVORITE = (payload: any) => ({
   type: "ADD_FAVORITE",
   payload,
 });
+export const SET_SEARCH_POSTS = (payload: any) => ({
+  type: "SET_SEARCH_POSTS",
+  payload,
+});
 
 export const FETCH_POSTS = () => {
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
     dispatch({ type: "SET_LOADING" });
 
-    const fetchPost = async () => {
-      const response = await fetch(
-        "https://studapi.teachmeskills.by/blog/posts/?lesson_num=2023&limit=17"
-      );
-      const data = await response.json();
-      const results = data.results;
-      dispatch({ type: "SET_POSTS", payload: results });
+    try {
+      instance.get("blog/posts/?lesson_num=2023&limit=100")
+      .then((data) => {
+        const results = data.data.results;
+        dispatch({ type: "SET_POSTS", payload: results });
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
       dispatch({ type: "SET_LOADING" });
-    };
-    fetchPost();
+    }
   };
 };
 
@@ -125,6 +135,7 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
             if (data.access) {
               navigate("/blog");
               localStorage.setItem("access", data.access);
+              localStorage.setItem("refresh", data.refresh);
             } else {
               console.log("Неверные логин или пароль");
             }
@@ -154,9 +165,7 @@ export const SIGN_IN_USER = (token: string) => {
           }
         ).then((data) => data.json());
         dispatch({ type: "SET_SIGN_IN", payload: data });
-
-        // localStorage.setItem("123", data.username);
-        console.log(data);
+        // console.log(data);
       } catch (err) {
         console.log(err);
       } finally {
@@ -164,5 +173,27 @@ export const SIGN_IN_USER = (token: string) => {
       }
     };
     signInUser();
+  };
+};
+
+export const FETCH_MY_POSTS = (token: string) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      const data = await fetch("https://studapi.teachmeskills.by/blog/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((data) => data.json())
+        .then((data) => data.results);
+      dispatch({ type: "SET_MY_POSTS", payload: data });
+      // console.log(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({ type: "SET_LOADING" });
+    }
   };
 };

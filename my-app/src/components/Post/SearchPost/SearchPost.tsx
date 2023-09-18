@@ -4,10 +4,15 @@ import { useSelector } from "react-redux";
 import { IPost, PostMid } from "../Post";
 import PageTemplate from "src/components/PageTemlate/PageTemplate";
 
+import './style.css'
+
 const SearchPost = ({ inputData }: any) => {
   const posts: IPost[] = useSelector(({ posts }) => posts);
+  const searchPosts: IPost[] = useSelector(({ searchPosts }) => searchPosts);
+  console.log(searchPosts);
+  console.log(posts);
 
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = searchPosts.filter((post) => {
     return post.title.toLowerCase().includes(inputData.toLowerCase());
   });
 
@@ -15,7 +20,7 @@ const SearchPost = ({ inputData }: any) => {
     <PageTemplate>
       <h1>Search results '{inputData}'</h1>
       <div className="serchResults">
-        {inputData.length >= 2
+        {inputData.length 
           ? filteredPosts.map((post) => (
               <PostMid
                 title={post.title}

@@ -114,9 +114,7 @@ p {
     padding: 10px;
 }
 
-.serchResults {
-    flex-grow: 1;
-}
+
 .post__likeDislike, .post__btn {
     display: flex;
     align-items: center;

@@ -34,7 +34,7 @@ const Post = () => {
   let selectedPost = +[id];
   // console.log(id);
   // console.log(postItem[0].id);
-  console.log(popupId);
+  // console.log(popupId);
 
   if (popupId) {
     selectedPost = +popupId;
