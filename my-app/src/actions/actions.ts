@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import instance from "src/axiosConfig";
@@ -195,5 +196,18 @@ export const FETCH_MY_POSTS = (token: string) => {
     } finally {
       dispatch({ type: "SET_LOADING" });
     }
+  };
+};
+export const FETCH_THEME = () => {
+  const theme = useSelector(({ theme }) => theme);
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+
+    try {
+
+      localStorage.setItem("theme", theme);
+      localStorage.getItem("access");
+    } catch (err) {
+      console.log(err);
+    } 
   };
 };
