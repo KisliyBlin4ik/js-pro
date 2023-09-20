@@ -1,23 +1,55 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import PopUpMenu from "./PopUpMenu";
 
+import { SET_SEARCH_POSTS, TOGGLE_OPEN } from "src/actions/actions";
+import instance from "src/axiosConfig";
+
+
 import "./style.css";
-import { useSelector } from "react-redux";
+import { IPost } from "../Post/Post";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 const BurgerMenu = ({ onSubmit }: any) => {
-  const [inputValue, setInputValue] = useState("");
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const navigate = useNavigate();
+  const open = useSelector(({ open }) => open);
+  // const searchPosts = useSelector(({ searchPosts }) => searchPosts);
+  // console.log(searchPosts);
+  
+  const [inputValue, setInputValue] = useState("");
+  console.log(inputValue);
+
+  let searchResults = [];
+  const [search, setSearch] = useState('')
+  const [search2, setSearch2] = useState<IPost[]>([])
+
+ 
+  
 
   const handleChange = (event: any) => {
     setInputValue(event.currentTarget.value);
   };
+
   useEffect(() => {
+    // https://studapi.teachmeskills.by/blog/posts/?search=Hel
+    instance.get(`blog/posts/?limit=100&offset=20&search=${inputValue}`)
+    .then((data) => {
+      console.log(data)
+      dispatch(SET_SEARCH_POSTS(data.data.results))
+    })
     onSubmit(inputValue);
+    setSearch(inputValue);
+    if (inputValue !== '') {
+      navigate(`/blog/posts/&limit=100&search=${inputValue}`)
+    } else if (inputValue === '') {
+      navigate('/blog')
+
+    }
   }, [inputValue]);
-  // console.log(open);
 
   const userName = useSelector(({ user }) => user.username);
 
@@ -26,12 +58,14 @@ const BurgerMenu = ({ onSubmit }: any) => {
       <div className="burgerMenu">
         <div
           className="burger"
-          onClick={() => {
-            setOpen(open ? false : true);
-          }}
+          onClick={() =>
+            dispatch(TOGGLE_OPEN(open === "close" ? "open" : "close"))
+          }
         >
-          <span className={`burgerLine ${open ? "open" : ""}`}></span>
-          <PopUpMenu openmenu={open} userName={userName} />
+          <span
+            className={`burgerLine ${open === "open" ? "open" : ""}`}
+          ></span>
+          <PopUpMenu userName={userName} />
         </div>
       </div>
       <div className="search">
@@ -42,12 +76,12 @@ const BurgerMenu = ({ onSubmit }: any) => {
           value={inputValue}
           onChange={handleChange}
         />
-        <a onClick={() => navigate("/search")}>
+        <a onClick={() => navigate(`/blog/posts/&limit=100&search=${inputValue}`)}>
           <div className="material-symbols-outlined">search</div>
         </a>
       </div>
       <div className="userName">
-        <span>{userName}</span>
+        <span>{userName ? userName : "user"}</span>
       </div>
     </div>
   );

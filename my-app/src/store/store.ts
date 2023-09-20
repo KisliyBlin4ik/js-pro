@@ -4,12 +4,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 export const initialState = {
   theme: "light_mode",
+  open: "close",
   popupInfo: {
     isOpen: "close",
     id: null,
     image: null,
   },
   posts: [],
+  myPosts: [],
+  searchPosts: [],
   post: {
     id: 0,
     image: "string",
@@ -35,6 +38,12 @@ const rootReducer = (state = initialState, action: any) => {
       return {
         ...state,
         theme: action.payload,
+      };
+    }
+    case "TOGGLE_OPEN": {
+      return {
+        ...state,
+        open: action.payload,
       };
     }
     case "TOGGLE_POPUP": {
@@ -76,6 +85,18 @@ const rootReducer = (state = initialState, action: any) => {
       return {
         ...state,
         user: action.payload,
+      };
+    }
+    case "SET_MY_POSTS": {
+      return {
+        ...state,
+        myPosts: action.payload,
+      };
+    }
+    case "SET_SEARCH_POSTS": {
+      return {
+        ...state,
+        searchPosts: action.payload,
       };
     }
     case "SET_LOADING": {

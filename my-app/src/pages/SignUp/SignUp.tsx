@@ -21,7 +21,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  console.log(name);
+  // console.log(name);
 
   return (
     <PageTemplate title="Sign Up">
