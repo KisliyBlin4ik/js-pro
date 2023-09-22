@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const StyledWrapper = styled.div<{ theme: 'light_mode' | 'dark_mode' }>`
-background: ${({ theme }) => theme === 'dark_mode' ? '#1a1a1a' : '#fff'};
+background: ${({ theme }) => theme === 'dark_mode' ? '#1a1a1a' : '#c7c7c7'};
 `
 
 export const StyledContainer = styled.div<{ theme: 'light_mode' | 'dark_mode' }>`
