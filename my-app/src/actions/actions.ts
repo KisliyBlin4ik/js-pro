@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import instance from "src/axiosConfig";
@@ -34,8 +33,7 @@ export const FETCH_POSTS = () => {
     dispatch({ type: "SET_LOADING" });
 
     try {
-      instance.get("blog/posts/?lesson_num=2023&limit=100")
-      .then((data) => {
+      instance.get("blog/posts/?lesson_num=2023&limit=100").then((data) => {
         const results = data.data.results;
         dispatch({ type: "SET_POSTS", payload: results });
       });
@@ -198,16 +196,62 @@ export const FETCH_MY_POSTS = (token: string) => {
     }
   };
 };
-export const FETCH_THEME = () => {
-  const theme = useSelector(({ theme }) => theme);
+
+interface IPosts {
+  title: string;
+  lesson_num: number;
+  images: any;
+  description: string;
+  text: string;
+}
+
+export const CREATE_POST = ({
+  title,
+  lesson_num,
+  images,
+  description,
+  text,
+}: IPosts) => {
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("lesson", lesson_num.toString());
+  formData.append("image", images[0].file);
+  formData.append("description", description);
+  formData.append("text", text);
+
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
 
     try {
-
-      localStorage.setItem("theme", theme);
-      localStorage.getItem("access");
+      // const data = await fetch("https://studapi.teachmeskills.by/api/schema/swagger-ui/#/blog/blog_posts_create", {
+      instance.post("/blog/posts/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (err) {
       console.log(err);
-    } 
+    } finally {
+      dispatch({ type: "SET_LOADING" });
+    }
+  };
+};
+
+export const SORT_POSTS = (sortState: string) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      instance
+        .get(`blog/posts/?offset=50&limit=850&ordering=${sortState}`)
+        .then((data) => {
+          const results = data.data.results;
+          dispatch({ type: "SET_POSTS", payload: results });
+        });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({ type: "SET_LOADING" });
+    }
   };
 };

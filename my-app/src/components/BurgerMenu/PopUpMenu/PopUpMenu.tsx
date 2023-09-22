@@ -29,7 +29,7 @@ const PopUpMenu: FC<IPopupMenu> = ({userName}) => {
         <StyledPopUpMenuItem theme={theme} onClick={() => navigate("/blog")}>
           Home
         </StyledPopUpMenuItem>
-        <StyledPopUpMenuItem theme={theme}>Add post</StyledPopUpMenuItem>
+        <StyledPopUpMenuItem theme={theme} onClick={() => navigate("/add-posts")}>Add posts</StyledPopUpMenuItem>
         <StyledPopUpMenuItem theme={theme} onClick={() => navigate("/my-post")}>My post</StyledPopUpMenuItem>
         <StyledPopUpMenuItem theme={theme} onClick={() => navigate("/sign-up")}>
           Sign Up

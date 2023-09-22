@@ -3,14 +3,13 @@
     align-items: center;
     justify-content: flex-start;
     height: 71px;
-    /* background-color: rgb(239, 239, 239); */
     background-color: white;
     border-bottom: 2px solid rgb(239, 239, 239);
 }
 
 .tabsItem {
     position: relative;
-    top: 4px;
+    top: 5px;
     min-width: 100px;
     height: 100%;
     padding: 20px;
@@ -19,7 +18,18 @@
     border: none;
     font-size: 18px;
     background-color: rgba(255, 255, 255, 0);
+}
 
+.sortItem {
+    position: relative;
+    top: 5px;
+    min-width: 100px;
+    height: 80%;
+    text-align: center;
+    text-transform: capitalize;
+    border: none;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .active-tab {

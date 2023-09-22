@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import "./style.css";
 
 interface IInput {
-  type: "password" | "text";
-  placeholder: string;
+  type: "password" | "text" | "file";
+  placeholder?: string;
   value: string;
   label: string;
   onChange: (value: string) => void;

@@ -29,6 +29,7 @@ import "./App.css";
 import ActivateUser from "./components/ActivateUser/ActivateUser";
 import SignIn from "./pages/SingIn/SignIn";
 import { decodeJwt, expToMinutes, updateAccessToken } from "./helpers";
+import AddPosts from "./pages/AddPosts";
 
 interface IThemeContext {
   popupId: number | null;
@@ -90,7 +91,7 @@ function App() {
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
-  console.log(inputData);
+  // console.log(inputData);
   
 // const searchPosts = useSelector(({ searchPosts }) => searchPosts);
 //   console.log(searchPosts);
@@ -122,6 +123,7 @@ function App() {
           <Route path="/blog/:id" element={<PostItem />}></Route>
           <Route path={`/blog/posts/&limit=100&search=${inputData}`} element={<SearchPost inputData={inputData} />}></Route>
           <Route path="/my-post" element={<MyPost />}></Route>
+          <Route path="/add-posts" element={<AddPosts />}></Route>
         </Routes>
         {popupIsOpen === "open" && popupId && !popupImage ? (
           <PopupPost>{<Post />}</PopupPost>
