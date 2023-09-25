@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import AllPost from "../Post/AllPost";
 import FavoritePost from "../Post/FavoritePost/FavoritePost";
 import PopularPost from "../Post/PopularPost/PopularPost";
 
-import { StyledTabContainer, StyledTabItem } from "./styled";
+import { StyledSortItem, StyledTabContainer, StyledTabItem } from "./styled";
 import "./style.css";
+import { SORT_POSTS } from "src/actions/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 const TabMenu = () => {
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const theme = useSelector(({ theme }) => theme);
   const [toggleState, setToggleState] = useState(1);
+
   const toggleTab = (index: number) => {
     setToggleState(index);
   };
@@ -42,6 +47,21 @@ const TabMenu = () => {
         >
           popular
         </StyledTabItem>
+        <StyledSortItem
+          theme={theme}
+          className="sortItem"
+          name=""
+          id=""
+          onClick={(e) => {
+            dispatch(SORT_POSTS(e.currentTarget.value));
+          }}
+        >
+          <option value="">Sort by</option>
+          <option>text</option>
+          <option>title</option>
+          <option>lesson_num</option>
+          <option>date</option>
+        </StyledSortItem>
       </StyledTabContainer>
 
       <div className="tabs__content">

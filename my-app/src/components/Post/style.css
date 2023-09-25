@@ -18,7 +18,6 @@
 .posts__items {
     display: flex;
     justify-content: space-between;
-    background-color: rgba(200, 200, 200, 0.29);
     width: 100%;
     box-sizing: border-box;
 }
@@ -51,7 +50,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border-bottom: 1px solid rgb(210, 209, 209);
+    border-bottom: 1px solid rgb(255, 255, 255);
     margin: 20px;
     padding: 0 0 10px ;
 }
@@ -59,7 +58,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border-bottom: 1px solid rgb(210, 209, 209);
+    border-bottom: 1px solid rgb(255, 255, 255);
     margin: 20px;
     padding: 0 0 10px ;
     gap: 10px;

@@ -1,0 +1,47 @@
+.addPosts__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.addPosts__footer {
+    display: flex;
+    justify-content: space-between;
+}
+.addPosts__footerRight {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.addPosts__input {
+    display: flex;
+    gap: 25px;
+}
+
+.addPostsBtn {
+    width: 100px;
+    height: 50px;
+    border: none;
+    font-size: 16px;
+}
+
+.addPosts__deleteBtn {
+    color: red;
+    background-color: rgba(0, 0, 0, 0);
+}
+.addPosts__cancelBtn {
+    /* color: red; */
+}
+.addPosts__addBtn {
+    color: white;
+    background-color: blue;
+}
+
+.addPosts__textArea {
+    padding: 10px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+}

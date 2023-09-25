@@ -21,7 +21,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
   // console.log(searchPosts);
   
   const [inputValue, setInputValue] = useState("");
-  console.log(inputValue);
+  // console.log(inputValue);
 
   let searchResults = [];
   const [search, setSearch] = useState('')
@@ -38,7 +38,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
     // https://studapi.teachmeskills.by/blog/posts/?search=Hel
     instance.get(`blog/posts/?limit=100&offset=20&search=${inputValue}`)
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       dispatch(SET_SEARCH_POSTS(data.data.results))
     })
     onSubmit(inputValue);
