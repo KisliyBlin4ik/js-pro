@@ -37,14 +37,15 @@ interface IThemeContext {
 
 export const ThemeContext = createContext<IThemeContext>({ popupId: null });
 
-function App() {
+const App = () => {
   
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
 
   const navigate = useNavigate();
+  const user = useSelector(({ user }) => user);
+  const userName = useSelector(({ user }) => user.username);
 
   const token = localStorage.getItem("access");
-  // console.log(token);
 
   let expTimestampInSeconds = 0;
 
@@ -85,13 +86,12 @@ function App() {
         navigate("/signIn");
       }
     });
-  }, []);
+  }, [token]);
 
   const [inputData, setInputData] = useState("");
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
-  // console.log(inputData);
   
 // const searchPosts = useSelector(({ searchPosts }) => searchPosts);
 //   console.log(searchPosts);
@@ -105,7 +105,7 @@ function App() {
     <ThemeContext.Provider value={{ popupId }}>
       <StyledWrapper className="wrapper" theme={theme}>
         <header>
-          <BurgerMenu onSubmit={handleInputSubmit} />
+          <BurgerMenu userName={userName} onSubmit={handleInputSubmit} />
         </header>
         <Routes>
           {!token && (
@@ -124,6 +124,7 @@ function App() {
           <Route path={`/blog/posts/&limit=100&search=${inputData}`} element={<SearchPost inputData={inputData} />}></Route>
           <Route path="/my-post" element={<MyPost />}></Route>
           <Route path="/add-posts" element={<AddPosts />}></Route>
+          {/* <Route path="*" element={<Success />}></Route> */}
         </Routes>
         {popupIsOpen === "open" && popupId && !popupImage ? (
           <PopupPost>{<Post />}</PopupPost>

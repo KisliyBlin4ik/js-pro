@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +13,21 @@ import { IPost } from "../Post/Post";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 
-const BurgerMenu = ({ onSubmit }: any) => {
+export interface IBurgerMenu {
+  userName: any;
+  onSubmit?: any;
+}
+
+const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const navigate = useNavigate();
   const open = useSelector(({ open }) => open);
+  // const userName = useSelector(({ user }) => user.username);
+  // вынести выше 
+  
+  // const token = useSelector(({ access }) => access.access);
+  const token = localStorage.getItem("access");
+
   // const searchPosts = useSelector(({ searchPosts }) => searchPosts);
   // console.log(searchPosts);
   
@@ -24,6 +35,8 @@ const BurgerMenu = ({ onSubmit }: any) => {
   // console.log(inputValue);
 
   let searchResults = [];
+  const [name, setName] = useState('')
+  
   const [search, setSearch] = useState('')
   const [search2, setSearch2] = useState<IPost[]>([])
 
@@ -35,8 +48,9 @@ const BurgerMenu = ({ onSubmit }: any) => {
   };
 
   useEffect(() => {
+    setName(userName);
     // https://studapi.teachmeskills.by/blog/posts/?search=Hel
-    instance.get(`blog/posts/?limit=100&offset=20&search=${inputValue}`)
+    instance.get(`blog/posts/?limit=10&search=${inputValue}`)
     .then((data) => {
       // console.log(data)
       dispatch(SET_SEARCH_POSTS(data.data.results))
@@ -45,13 +59,11 @@ const BurgerMenu = ({ onSubmit }: any) => {
     setSearch(inputValue);
     if (inputValue !== '') {
       navigate(`/blog/posts/&limit=100&search=${inputValue}`)
-    } else if (inputValue === '') {
+    } else if (inputValue === '' && token) {
       navigate('/blog')
-
     }
-  }, [inputValue]);
+  }, [inputValue, userName]);
 
-  const userName = useSelector(({ user }) => user.username);
 
   return (
     <div className="header__container">
@@ -65,7 +77,7 @@ const BurgerMenu = ({ onSubmit }: any) => {
           <span
             className={`burgerLine ${open === "open" ? "open" : ""}`}
           ></span>
-          <PopUpMenu userName={userName} />
+          <PopUpMenu userName={token ? name : 'user'} />
         </div>
       </div>
       <div className="search">
@@ -76,12 +88,13 @@ const BurgerMenu = ({ onSubmit }: any) => {
           value={inputValue}
           onChange={handleChange}
         />
-        <a onClick={() => navigate(`/blog/posts/&limit=100&search=${inputValue}`)}>
+        <a onClick={() => navigate(`/blog/posts/limit=10&search=${inputValue}`)}>
           <div className="material-symbols-outlined">search</div>
         </a>
       </div>
       <div className="userName">
-        <span>{userName ? userName : "user"}</span>
+        <span>{token && name ? name : 'user'}</span>
+        {/* <span>{userName === 'Artemqwertyui123456' ? 'jon snow' : userName ? userName : 'user'}</span> */}
       </div>
     </div>
   );

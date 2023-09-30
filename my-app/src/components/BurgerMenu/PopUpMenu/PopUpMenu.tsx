@@ -6,12 +6,19 @@ import ToggleThemeBtn from "src/components/PageTemlate/ToggleThemeBtn";
 
 import { StyledPopUpMenu, StyledPopUpMenuItem } from "./styled";
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+
+import {IBurgerMenu} from '../BurgerMenu'
 
 interface IPopupMenu {
   userName: string;
 }
 
-const PopUpMenu: FC<IPopupMenu> = ({userName}) => {
+const PopUpMenu: FC<IBurgerMenu> = ({userName}) => {
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+
   const navigate = useNavigate();
   const theme = useSelector(({ theme }) => theme);
   const open = useSelector(({ open }) => open);
@@ -19,6 +26,7 @@ const PopUpMenu: FC<IPopupMenu> = ({userName}) => {
   const exit = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
+    // dispatch({ type: "SET_SIGN_IN", payload:  });
     navigate("/sign-in");
   };
 

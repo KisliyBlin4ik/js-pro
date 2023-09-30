@@ -134,6 +134,7 @@ export const SIGN_IN = (navigate: any, email: string, password: string) => {
             if (data.access) {
               navigate("/blog");
               localStorage.setItem("access", data.access);
+              dispatch({ type: "SET_ACCESS_TOKEN", payload: data });
               localStorage.setItem("refresh", data.refresh);
             } else {
               console.log("Неверные логин или пароль");
@@ -164,7 +165,6 @@ export const SIGN_IN_USER = (token: string) => {
           }
         ).then((data) => data.json());
         dispatch({ type: "SET_SIGN_IN", payload: data });
-        // console.log(data);
       } catch (err) {
         console.log(err);
       } finally {
