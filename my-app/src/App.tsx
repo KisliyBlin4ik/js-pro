@@ -119,6 +119,7 @@ const App = () => {
               <Route path="/success" element={<Success />}></Route>
             </>
           )}
+          <Route path="/" element={<PostList />}></Route>
           <Route path="/blog" element={<PostList />}></Route>
           <Route path="/blog/:id" element={<PostItem />}></Route>
           <Route path={`/blog/posts/&limit=100&search=${inputData}`} element={<SearchPost inputData={inputData} />}></Route>

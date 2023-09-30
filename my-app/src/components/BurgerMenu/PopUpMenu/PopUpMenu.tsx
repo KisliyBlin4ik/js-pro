@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -18,18 +19,18 @@ interface IPopupMenu {
 
 const PopUpMenu: FC<IBurgerMenu> = ({userName}) => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
-
+  
   const navigate = useNavigate();
   const theme = useSelector(({ theme }) => theme);
   const open = useSelector(({ open }) => open);
-
+  
   const exit = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     // dispatch({ type: "SET_SIGN_IN", payload:  });
     navigate("/sign-in");
   };
-
+  
   return (
     <StyledPopUpMenu theme={theme} className="popUpMenu" open={open}>
       <div className="popUpMenu__item">
@@ -49,6 +50,8 @@ const PopUpMenu: FC<IBurgerMenu> = ({userName}) => {
       </div>
     </StyledPopUpMenu>
   );
+ 
+  
 };
 
 export default PopUpMenu;

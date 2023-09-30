@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PopUpMenu from "./PopUpMenu";
 
 import { SET_SEARCH_POSTS, TOGGLE_OPEN } from "src/actions/actions";
-import instance from "src/axiosConfig";
+import instance from "src/axiosConfig.js";
 
 
 import "./style.css";
@@ -51,7 +51,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
     setName(userName);
     // https://studapi.teachmeskills.by/blog/posts/?search=Hel
     instance.get(`blog/posts/?limit=10&search=${inputValue}`)
-    .then((data) => {
+    .then((data: any) => {
       // console.log(data)
       dispatch(SET_SEARCH_POSTS(data.data.results))
     })
@@ -60,7 +60,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
     if (inputValue !== '') {
       navigate(`/blog/posts/&limit=100&search=${inputValue}`)
     } else if (inputValue === '' && token) {
-      navigate('/blog')
+      // navigate('/blog')
     }
   }, [inputValue, userName]);
 

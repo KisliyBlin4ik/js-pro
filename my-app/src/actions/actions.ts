@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import instance from "src/axiosConfig";
+import instance from "src/axiosConfig.js";
 import { IPost, IUser } from "src/components/Post/Post";
 
 export const INCREMENT_CREATOR = (payload: number) => ({
@@ -244,7 +244,7 @@ export const SORT_POSTS = (sortState: string) => {
     try {
       instance
         .get(`blog/posts/?offset=50&limit=850&ordering=${sortState}`)
-        .then((data) => {
+        .then((data: any) => {
           const results = data.data.results;
           dispatch({ type: "SET_POSTS", payload: results });
         });
