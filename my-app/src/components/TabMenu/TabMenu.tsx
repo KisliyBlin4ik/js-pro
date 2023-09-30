@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+
+import { SORT_POSTS } from "src/actions/actions";
 
 import AllPost from "../Post/AllPost";
 import FavoritePost from "../Post/FavoritePost/FavoritePost";
@@ -7,9 +11,6 @@ import PopularPost from "../Post/PopularPost/PopularPost";
 
 import { StyledSortItem, StyledTabContainer, StyledTabItem } from "./styled";
 import "./style.css";
-import { SORT_POSTS } from "src/actions/actions";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 
 const TabMenu = () => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();

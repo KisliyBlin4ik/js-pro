@@ -244,7 +244,7 @@ export const SORT_POSTS = (sortState: string) => {
     try {
       instance
         .get(`blog/posts/?offset=50&limit=850&ordering=${sortState}`)
-        .then((data: any) => {
+        .then((data) => {
           const results = data.data.results;
           dispatch({ type: "SET_POSTS", payload: results });
         });

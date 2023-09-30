@@ -2,15 +2,15 @@
 import React, { useContext, FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import { ThemeContext } from "src/App";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 import { FETCH_POST, TOGGLE_POPUP } from "src/actions/actions";
 
+import { ThemeContext } from "src/App";
+
 import { StyledPostBtn } from "./styled";
 import "./style.css";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 export interface IPost {
   id: number;
   text?: string;
@@ -29,13 +29,9 @@ export interface IUser {
 
 const Post = () => {
   const posts: IPost[] = useSelector(({ posts }) => posts);
-  const postItem = useSelector(({ post }) => post);
   const { id } = useParams();
   const { popupId } = useContext(ThemeContext);
   let selectedPost = +[id];
-  // console.log(id);
-  // console.log(postItem[0].id);
-  // console.log(popupId);
 
   if (popupId) {
     selectedPost = +popupId;
@@ -61,9 +57,9 @@ const Post = () => {
 };
 
 export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
+
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
   const theme = useSelector(({ theme }) => theme);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -127,16 +123,11 @@ export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
 };
 
 export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
-  // console.log(id);
   
   const theme = useSelector(({ theme }) => theme);
-  const postItem = useSelector(({ post }) => post);
-  const favorite = useSelector(({ isFavorite }) => isFavorite);
   const navigate = useNavigate();
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
   const posts = useSelector(({ posts }) => posts);
-  const post = posts.filter((post: IPost) => post.id === id);
-  // console.log(post);
   
   return (
     <div className="post__mid ">

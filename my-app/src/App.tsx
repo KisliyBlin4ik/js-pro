@@ -93,8 +93,6 @@ const App = () => {
     setInputData(inputValue);
   };
   
-// const searchPosts = useSelector(({ searchPosts }) => searchPosts);
-//   console.log(searchPosts);
   const location = useLocation();
   const theme = useSelector(({ theme }) => theme);
   const popupId = useSelector(({ popupInfo }) => popupInfo.id);
@@ -125,7 +123,6 @@ const App = () => {
           <Route path={`/blog/posts/&limit=100&search=${inputData}`} element={<SearchPost inputData={inputData} />}></Route>
           <Route path="/my-post" element={<MyPost />}></Route>
           <Route path="/add-posts" element={<AddPosts />}></Route>
-          {/* <Route path="*" element={<Success />}></Route> */}
         </Routes>
         {popupIsOpen === "open" && popupId && !popupImage ? (
           <PopupPost>{<Post />}</PopupPost>
