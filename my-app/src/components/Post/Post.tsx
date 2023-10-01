@@ -122,7 +122,7 @@ export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
   );
 };
 
-export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
+export const PostMid: FC<IPost> = ({ title, text, date, id, image, likes }) => {
   
   const theme = useSelector(({ theme }) => theme);
   const navigate = useNavigate();
@@ -140,6 +140,8 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
         </div>
         <p className="post__date">{date}</p>
         <p className="post__title">{title}</p>
+        {text ? <p className="post__text">{text}</p> : null}
+        <p className="post__title">{}</p>
       </div>
       <div className="post__footer">
         <div className="post__likeDislike">

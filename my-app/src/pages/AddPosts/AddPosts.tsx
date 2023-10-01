@@ -1,41 +1,39 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+
+import ImageUploading from "react-images-uploading";
+import { CREATE_POST } from "src/actions/actions";
+
 import Input from "src/components/Input";
 import PageTemplate from "src/components/PageTemlate/PageTemplate";
-import ImageUploading from "react-images-uploading";
 
 import "./style.css";
-import { CREATE_POST } from "src/actions/actions";
 
 const AddPosts = () => {
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
 
-  const theme = useSelector(({ theme }) => theme);
   const [title, setTitle] = useState("");
   const [lesson_num, setLesson] = useState("");
-  const [image, setImage] = useState("");
   const [textDescription, setTextDescription] = useState("");
   const [text, setText] = useState("");
 
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
+  console.log(images);
+
   const onChange = (imageList: any, addUpdateIndex: any) => {
-    // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-  //   console.log(images[0].data_url);
 
   return (
-    <PageTemplate title="Add posts">
+    <PageTemplate title="addPosts">
       <div className="addPosts__container">
         <Input
           type="text"
-          placeholder="Astronauts"
+          placeholder="Add title"
           value={title}
           label="Title"
           onChange={setTitle}
@@ -48,14 +46,9 @@ const AddPosts = () => {
             label="Lesson number"
             onChange={setLesson}
           />
-          <input
-            type="file"
-            value={images}
-            onChange={(e) => onChange(image, images)}
-          />
         </div>
 
-        <div className="App">
+        <div className="addPosts__app">
           <ImageUploading
             multiple
             value={images}
@@ -142,7 +135,6 @@ const AddPosts = () => {
                   CREATE_POST({
                     title,
                     lesson_num: +lesson_num,
-                    // @ts-expect-error
                     image: images,
                     description: textDescription,
                     text,

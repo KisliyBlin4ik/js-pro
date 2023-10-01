@@ -180,15 +180,14 @@ export const FETCH_MY_POSTS = (token: string) => {
     dispatch({ type: "SET_LOADING" });
 
     try {
-      const data = await fetch("https://studapi.teachmeskills.by/blog/posts", {
+      await instance.get("/blog/posts/my_posts/?limit=10", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((data) => data.json())
-        .then((data) => data.results);
-      dispatch({ type: "SET_MY_POSTS", payload: data });
-      // console.log(data);
+        .then((data) => data.data)
+        .then((data) => data.results)
+        .then((data) => dispatch({ type: "SET_MY_POSTS", payload: data }))
     } catch (err) {
       console.log(err);
     } finally {
@@ -200,7 +199,7 @@ export const FETCH_MY_POSTS = (token: string) => {
 interface IPosts {
   title: string;
   lesson_num: number;
-  images: any;
+  image: any;
   description: string;
   text: string;
 }
@@ -208,27 +207,22 @@ interface IPosts {
 export const CREATE_POST = ({
   title,
   lesson_num,
-  images,
+  image,
   description,
   text,
 }: IPosts) => {
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("lesson", lesson_num.toString());
-  formData.append("image", images[0].file);
-  formData.append("description", description);
-  formData.append("text", text);
-
   return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
     dispatch({ type: "SET_LOADING" });
 
     try {
-      // const data = await fetch("https://studapi.teachmeskills.by/api/schema/swagger-ui/#/blog/blog_posts_create", {
-      instance.post("/blog/posts/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("lesson_num", lesson_num.toString());
+      formData.append("image", image[0].file);
+      formData.append("description", description);
+      formData.append("text", text);
+
+      await instance.post("/blog/posts/", formData);
     } catch (err) {
       console.log(err);
     } finally {
@@ -243,10 +237,39 @@ export const SORT_POSTS = (sortState: string) => {
 
     try {
       instance
-        .get(`blog/posts/?offset=50&limit=850&ordering=${sortState}`)
+        .get(`blog/posts/?offset=50&limit=1000&ordering=${sortState}`)
         .then((data) => {
           const results = data.data.results;
           dispatch({ type: "SET_POSTS", payload: results });
+        });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch({ type: "SET_LOADING" });
+    }
+  };
+};
+
+export const SET_MY_POSTS = (sortState: string, token: string) => {
+  return async (dispatch: ThunkDispatch<any, {}, AnyAction>) => {
+    dispatch({ type: "SET_LOADING" });
+
+    try {
+      token && instance
+        .get(`blog/posts/?offset=0&limit=1000&ordering=${sortState}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((data) => {
+          let a:any = []
+          const results = data.data.results;
+          let myResults = results.find((element: any) => {
+           if (element.author === 7025) {
+            console.log(element);
+           } 
+          });
+          dispatch({ type: "SET_MY_POSTS2", payload:  myResults })
         });
     } catch (err) {
       console.log(err);
