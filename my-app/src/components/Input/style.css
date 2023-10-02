@@ -12,10 +12,14 @@
     outline: none;
     font-size: 18px;
     text-indent: 15px;
-    color: rgb(210, 209, 209);
+    /* color: rgb(210, 209, 209); */
     background-color: white;
 }
 
 .formInput input::placeholder {
+    color: rgb(210, 209, 209);
+}
+
+textarea::placeholder {
     color: rgb(210, 209, 209);
 }

@@ -92,8 +92,7 @@ const App = () => {
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
-// const searchPosts = useSelector(({ searchPosts }) => searchPosts);
-//   console.log(searchPosts);
+
   const location = useLocation();
   const theme = useSelector(({ theme }) => theme);
   const popupId = useSelector(({ popupInfo }) => popupInfo.id);

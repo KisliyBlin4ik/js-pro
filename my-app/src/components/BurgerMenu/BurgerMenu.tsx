@@ -1,17 +1,16 @@
 import React, { useState, useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+
+import { SET_SEARCH_POSTS, TOGGLE_OPEN } from "src/actions/actions";
+
+import instance from "src/axiosConfig.js";
 
 import PopUpMenu from "./PopUpMenu";
 
-import { SET_SEARCH_POSTS, TOGGLE_OPEN } from "src/actions/actions";
-import instance from "src/axiosConfig.js";
-
-
 import "./style.css";
-import { IPost } from "../Post/Post";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 
 export interface IBurgerMenu {
   userName: any;
@@ -21,27 +20,13 @@ export interface IBurgerMenu {
 const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const navigate = useNavigate();
+
   const open = useSelector(({ open }) => open);
-  // const userName = useSelector(({ user }) => user.username);
-  // вынести выше 
-  
-  // const token = useSelector(({ access }) => access.access);
+
   const token = localStorage.getItem("access");
 
-  // const searchPosts = useSelector(({ searchPosts }) => searchPosts);
-  // console.log(searchPosts);
-  
   const [inputValue, setInputValue] = useState("");
-  // console.log(inputValue);
-
-  let searchResults = [];
   const [name, setName] = useState('')
-  
-  const [search, setSearch] = useState('')
-  const [search2, setSearch2] = useState<IPost[]>([])
-
- 
-  
 
   const handleChange = (event: any) => {
     setInputValue(event.currentTarget.value);
@@ -50,17 +35,15 @@ const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
   useEffect(() => {
     setName(userName);
     // https://studapi.teachmeskills.by/blog/posts/?search=Hel
-    instance.get(`blog/posts/?limit=100&offset=20&search=${inputValue}`)
+    instance.get(`blog/posts/?limit=10&search=${inputValue}`)
     .then((data) => {
-      // console.log(data)
       dispatch(SET_SEARCH_POSTS(data.data.results))
     })
     onSubmit(inputValue);
-    setSearch(inputValue);
     if (inputValue !== '') {
       navigate(`/blog/posts/&limit=100&search=${inputValue}`)
     } else if (inputValue === '' && token) {
-      // navigate('/blog')
+      navigate('/')
     }
   }, [inputValue, userName]);
 
@@ -94,7 +77,6 @@ const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
       </div>
       <div className="userName">
         <span>{token && name ? name : 'user'}</span>
-        {/* <span>{userName === 'Artemqwertyui123456' ? 'jon snow' : userName ? userName : 'user'}</span> */}
       </div>
     </div>
   );

@@ -1,21 +1,15 @@
 'use client'
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-import ToggleThemeBtn from "src/components/PageTemlate/ToggleThemeBtn";
-
-import { StyledPopUpMenu, StyledPopUpMenuItem } from "./styled";
-import "./style.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 
-import {IBurgerMenu} from '../BurgerMenu'
+import ToggleThemeBtn from "src/components/PageTemlate/ToggleThemeBtn";
+import { IBurgerMenu } from '../BurgerMenu';
 
-interface IPopupMenu {
-  userName: string;
-}
+import { StyledPopUpMenu, StyledPopUpMenuItem } from "./styled";
+import "./style.css";
 
 const PopUpMenu: FC<IBurgerMenu> = ({userName}) => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
@@ -27,7 +21,6 @@ const PopUpMenu: FC<IBurgerMenu> = ({userName}) => {
   const exit = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
-    // dispatch({ type: "SET_SIGN_IN", payload:  });
     navigate("/sign-in");
   };
   

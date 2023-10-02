@@ -40,8 +40,6 @@
     background-color: blue;
 }
 
-.addPosts__textArea {
-    padding: 10px;
-    border: none;
-    background-color: rgb(255, 255, 255);
+.image-item {
+    max-width: 50%;
 }
