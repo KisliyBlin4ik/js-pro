@@ -92,7 +92,7 @@ const App = () => {
   const handleInputSubmit = (inputValue: string) => {
     setInputData(inputValue);
   };
-  
+
   const location = useLocation();
   const theme = useSelector(({ theme }) => theme);
   const popupId = useSelector(({ popupInfo }) => popupInfo.id);
