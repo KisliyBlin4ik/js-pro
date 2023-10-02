@@ -50,8 +50,8 @@ const BurgerMenu: FC<IBurgerMenu> = ({userName, onSubmit}) => {
   useEffect(() => {
     setName(userName);
     // https://studapi.teachmeskills.by/blog/posts/?search=Hel
-    instance.get(`blog/posts/?limit=10&search=${inputValue}`)
-    .then((data: any) => {
+    instance.get(`blog/posts/?limit=100&offset=20&search=${inputValue}`)
+    .then((data) => {
       // console.log(data)
       dispatch(SET_SEARCH_POSTS(data.data.results))
     })
