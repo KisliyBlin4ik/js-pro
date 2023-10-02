@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -127,7 +128,7 @@ export const PostBig: FC<IPost> = ({ title, text, id, date, image, likes }) => {
 
 export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
   // console.log(id);
-
+  
   const theme = useSelector(({ theme }) => theme);
   const postItem = useSelector(({ post }) => post);
   const favorite = useSelector(({ isFavorite }) => isFavorite);
@@ -136,7 +137,7 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
   const posts = useSelector(({ posts }) => posts);
   const post = posts.filter((post: IPost) => post.id === id);
   // console.log(post);
-
+  
   return (
     <div className="post__mid ">
       <div
@@ -178,7 +179,6 @@ export const PostMid: FC<IPost> = ({ title, date, id, image, likes }) => {
           <StyledPostBtn
             theme={theme}
             className="btn__popup material-symbols-outlined"
-            // onClick={() => navigate(`/blog/${id}`)}
             onClick={() => dispatch(FETCH_POST(navigate, id))}
           >
             more_horiz

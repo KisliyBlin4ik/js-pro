@@ -10,6 +10,7 @@ export const initialState = {
     id: null,
     image: null,
   },
+  access: [],
   posts: [],
   myPosts: [],
   searchPosts: [],
@@ -61,6 +62,12 @@ const rootReducer = (state = initialState, action: any) => {
       return {
         ...state,
         posts: action.payload,
+      };
+    }
+    case "SET_ACCESS_TOKEN": {
+      return {
+        ...state,
+        access: action.payload,
       };
     }
     case "SET_POST": {
