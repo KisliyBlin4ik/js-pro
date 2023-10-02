@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import { useNavigate } from "react-router";
 
 import ImageUploading from "react-images-uploading";
 import { CREATE_POST } from "src/actions/actions";
 
 import Input from "src/components/Input";
 import PageTemplate from "src/components/PageTemlate/PageTemplate";
+import Textarea from "src/components/Textarea";
 
 import "./style.css";
 
 const AddPosts = () => {
   const dispatch: ThunkDispatch<any, {}, AnyAction> = useDispatch();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [lesson_num, setLesson] = useState("");
@@ -26,6 +29,14 @@ const AddPosts = () => {
   const onChange = (imageList: any, addUpdateIndex: any) => {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
+  };
+
+  const deletePostData = () => {
+    setTitle("");
+    setLesson("");
+    setTextDescription("");
+    setText("");
+    setImages([]);
   };
 
   return (
@@ -94,37 +105,34 @@ const AddPosts = () => {
           </ImageUploading>
         </div>
 
-        <textarea
-          className="addPosts__textArea"
-          placeholder="Add your text"
+        <Textarea
+          label="Description"
+          placeholder="Add your description text"
           value={textDescription}
-          name=""
-          id=""
           cols={30}
           rows={4}
-          onChange={(e) => setTextDescription(e.currentTarget.value)}
-        ></textarea>
-        <textarea
-          className="addPosts__textArea"
+          onChange={(e) => setTextDescription(e)}
+        />
+        <Textarea
+          label="Text"
           placeholder="Add your text"
           value={text}
-          name=""
-          id=""
           cols={30}
           rows={10}
-          onChange={(e) => setText(e.currentTarget.value)}
-        ></textarea>
+          onChange={(e) => setText(e)}
+        />
+
         <div className="addPosts__footer">
           <button
             className="addPosts__deleteBtn addPostsBtn"
-            // onClick={() => dispatch(SIGN_IN(navigate, email, password))}
+            onClick={() => deletePostData()}
           >
             Delete post
           </button>
           <div className="addPosts__footerRight">
             <button
               className="addPosts__cancelBtn addPostsBtn"
-              // onClick={() => dispatch(SIGN_IN(navigate, email, password))}
+              onClick={() => navigate("/")}
             >
               Cancel
             </button>
